@@ -2155,6 +2155,7 @@ HAL_readMtr1ADCData(HAL_ADCData_t *pADCData)
 #else   // Three-shunt, !MOTOR1_DCLINKSS & !DRV8329AEVM_REVA
 
     // convert phase A current
+    //这里使用了PPB模块
     value = (float32_t)ADC_readPPBResult(MTR1_IU_ADCRES_BASE, MTR1_IU_ADC_PPB_NUM);
     pADCData->I_A.value[0] = value * pADCData->current_sf;
 
