@@ -259,7 +259,7 @@ void main(void)
     // set the reference speed, this can be replaced or removed
     motorVars_M1.flagEnableRunAndIdentify = false;
 
-    motorVars_M1.speedRef_Hz = 60.0f;       // Hz
+    motorVars_M1.speedRef_Hz = 10.0f;       // Hz
     motorVars_M1.speedRef_rpm = 600.0f;     // rpm
 
     // false - enables identification, true - disables identification

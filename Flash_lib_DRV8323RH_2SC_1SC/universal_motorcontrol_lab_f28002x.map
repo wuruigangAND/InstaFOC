@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v22.6.1                     
 ******************************************************************************
->> Linked Fri Jun 21 22:18:56 2024
+>> Linked Tue Jun 25 16:36:40 2024
 
 OUTPUT FILE NAME:   <universal_motorcontrol_lab_f28002x.out>
 ENTRY POINT SYMBOL: "code_start"  address: 00080000
@@ -115,7 +115,7 @@ MEMORY CONFIGURATION
   FLASH0CTRL            0005f800   00000182  00000000  00000182  RWIX
   FLASH0ECC             0005fb00   00000028  00000000  00000028  RWIX
   FLASHBANK0_BOOT       00080000   00001000  00000002  00000ffe  RWIX
-  FLASHBANK0_CODE       00081000   0000d000  00004c3b  000083c5  RWIX
+  FLASHBANK0_CODE       00081000   0000d000  00004c39  000083c7  RWIX
   FLASHBANK0_DATA       0008e000   00001000  0000003c  00000fc4  RWIX
   FLASHBANK0_PRMS       0008f000   00000ff0  00000000  00000ff0  RWIX
   RESET                 003fffc0   00000002  00000000  00000002  RWIX
@@ -182,7 +182,7 @@ dclfuncs   0    000820e4    00000000     UNINITIALIZEDRUN ADDR = 0000b8e4
 dcl32funcs 
 *          0    000820e4    00000000     UNINITIALIZEDRUN ADDR = 0000b8e4
 
-.text      0    000820e8    00003b0b     
+.text      0    000820e8    00003b09     
                   000820e8    00000408     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_setParams)
                   000824f0    00000347     motor1_drive.obj (.text:runMotor1OffsetsCalculation)
                   00082837    000002f6     motor1_drive.obj (.text:initMotor1CtrlParameters)
@@ -191,239 +191,239 @@ dcl32funcs
                   00083099    00000284     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_updateState)
                   0008331d    0000025b     user_mtr1.obj (.text:USER_setMotor1Params)
                   00083578    000001e3     motor_common.obj (.text:runMotorMonitor)
-                  0008375b    000001c5     sys_main.obj (.text:main)
-                  00083920    000001be     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_reset)
-                  00083ade    0000015f     hal.obj (.text:HAL_setupPWMs)
-                  00083c3d    0000012e     sysctl.obj (.text:SysCtl_setClock)
-                  00083d6b    0000010f     fast_full_lib_eabi.lib : est_Traj_flib_priv.obj (.text:EST_Traj_configure)
-                  00083e7a    0000010d     motor_common.obj (.text:setupControllers)
-                  00083f87    00000001     rts2800_fpu32_eabi.lib : startup.c.obj (.text)
-                  00083f88    000000fa     hal.obj (.text:HAL_setupMtrFaults)
-                  00084082    000000da     sysctl.obj (.text:SysCtl_isPLLValid)
-                  0008415c    000000d6     motor_common.obj (.text:updateGlobalVariables)
-                  00084232    000000c6     hal.obj (.text:HAL_setupADCs)
-                  000842f8    000000c4     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_init)
-                  000843bc    000000ab                            : est_Traj_flib_priv.obj (.text:EST_Traj_setParams)
-                  00084467    000000a0     device.obj (.text:Device_enableAllPeripherals)
-                  00084507    00000086     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_setLpFilterParams)
-                  0008458d    00000086     motor_common.obj (.text:calculateRMSData)
-                  00084613    00000086     motor_common.obj (.text:resetMotorControl)
-                  00084699    0000007c     hal.obj (.text:HAL_setupCMPSSs)
-                  00084715    00000077     fast_full_lib_eabi.lib : user_flib_priv.obj (.text:USER_setParams_priv)
-                  0008478c    00000071     hal.obj (.text:HAL_setupI2CA)
-                  000847fd    00000062     sysctl.obj (.text:SysCtl_pollX1Counter)
-                  0008485f    00000061     motor_common.obj (.text:runRsOnLine)
-                  000848c0    0000005c     fast_full_lib_eabi.lib : est_Flux_flib_priv.obj (.text:EST_Flux_setParams)
-                  0008491c    00000059                            : est_Traj_flib_priv.obj (.text:EST_Traj_updateState)
-                  00084975    00000058     i2c.obj (.text:I2C_initController)
-                  000849cd    00000056     dac128s085.obj (.text:DAC128S_writeData)
-                  00084a23    00000053     motor_common.obj (.text:collectRMSData)
-                  00084a76    00000052     hal.obj (.text:HAL_setupSCIA)
-                  00084ac8    0000004f     dac128s085.obj (.text:DAC128S_setupSPI)
-                  00084b17    0000004f     motor_common.obj (.text:restartMotorControl)
-                  00084b66    0000004e     fast_full_lib_eabi.lib : est_Freq_flib_priv.obj (.text:EST_Freq_setParams)
-                  00084bb4    0000004a                            : est_Dir_flib_priv.obj (.text:EST_Dir_setHpFilterParams)
-                  00084bfe    0000004a                            : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_setDerFilterParams)
-                  00084c48    0000004a                            : est_Iab_flib_priv.obj (.text:EST_Iab_setLpFilterParams)
-                  00084c92    0000004a                            : est_Idq_flib_priv.obj (.text:EST_Idq_setLpFilterParams)
-                  00084cdc    0000004a                            : est_Vdq_flib_priv.obj (.text:EST_Vdq_setLpFilterParams)
-                  00084d26    00000048     sysctl.obj (.text:SysCtl_selectXTAL)
-                  00084d6e    00000045     fast_full_lib_eabi.lib : est_RsOnLine_flib_priv.obj (.text:EST_RsOnLine_setParams)
-                  00084db3    00000041     interrupt.obj (.text:Interrupt_initModule)
-                  00084df4    0000003f     fast_full_lib_eabi.lib : est_Ls_flib_priv.obj (.text:EST_Ls_setParams)
-                  00084e33    0000003f     gpio.obj (.text:GPIO_setPadConfig)
-                  00084e72    0000003d     fast_full_lib_eabi.lib : est_RsOnLine_flib_priv.obj (.text:EST_RsOnLine_setLpFilterParams)
-                  00084eaf    0000003a                            : est_Flux_flib_priv.obj (.text:EST_Flux_updateState)
-                  00084ee9    0000003a     vs_freq.obj (.text:VS_FREQ_setProfile)
-                  00084f23    00000037     device.obj (.text:Device_init)
-                  00084f5a    00000036     interrupt.obj (.text:Interrupt_enable)
-                  00084f90    00000035     fast_full_lib_eabi.lib : est_Ls_flib_priv.obj (.text:EST_Ls_updateState)
-                  00084fc5    00000033                            : est_Rr_flib_priv.obj (.text:EST_Rr_updateState)
-                  00084ff8    00000033                            : est_Rs_flib_priv.obj (.text:EST_Rs_updateState)
-                  0008502b    00000032     hal.obj (.text:HAL_enableDRV)
-                  0008505d    00000031     dac128s085.obj (.text:DAC128S_writeCommand)
-                  0008508e    00000031     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_init)
-                  000850bf    00000030     gpio.obj (.text:GPIO_setPinConfig)
-                  000850ef    00000030     rts2800_fpu32_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss)
-                  0008511f    0000002f     motor_common.obj (.text:calcMotorOverCurrentThreshold)
-                  0008514e    0000002e     fast_full_lib_eabi.lib : est_Iab_flib_priv.obj (.text:EST_Iab_resetLpFilters)
-                  0008517c    0000002e     hal.obj (.text:HAL_MTR1_init)
-                  000851aa    0000002d     hal.obj (.text:HAL_init)
-                  000851d7    0000002b     sci.obj (.text:SCI_setConfig)
-                  00085202    0000002b     xbar.obj (.text:XBAR_setEPWMMuxConfig)
-                  0008522d    0000002b     rts2800_fpu32_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
-                  00085258    0000002a     fast_full_lib_eabi.lib : est_Freq_flib_priv.obj (.text:EST_Freq_setDerFilterParams)
-                  00085282    0000002a                            : est_Freq_flib_priv.obj (.text:EST_Freq_setLpFilterParams)
-                  000852ac    0000002a                            : est_Vdq_flib_priv.obj (.text:EST_Vdq_resetLpFilters)
-                  000852d6    0000002a     hal.obj (.text:HAL_setupTimeBaseTimer)
-                  00085300    00000029     fast_full_lib_eabi.lib : est_OneOverDcBus_flib_priv.obj (.text:EST_OneOverDcBus_setParams)
-                  00085329    00000029                            : est_RsOnLine_flib_priv.obj (.text:EST_RsOnLine_init)
-                  00085352    00000029                            : est_flib_priv.obj (.text:EST_setFluxBeta_lp)
-                  0008537b    00000029     hal.obj (.text:HAL_MTR_setParams)
-                  000853a4    00000029     rts2800_fpu32_eabi.lib : exit.c.obj (.text)
-                  000853cd    00000028     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_computeTorque_Nm)
-                  000853f5    00000026                            : est_Angle_flib_priv.obj (.text:EST_Angle_setParams)
-                  0008541b    00000026                            : est_Idq_flib_priv.obj (.text:EST_Idq_resetLpFilters)
-                  00085441    00000026     spi.obj (.text:SPI_setConfig)
-                  00085467    00000026     sysctl.obj (.text:SysCtl_selectOscSource)
-                  0008548d    00000024     hal.obj (.text:HAL_setParams)
-                  000854b1    00000022     gpio.obj (.text:GPIO_setQualificationMode)
-                  000854d3    00000022     sysctl.obj (.text:SysCtl_selectXTALSingleEnded)
-                  000854f5    00000020     gpio.obj (.text:GPIO_setDirectionMode)
-                  00085515    00000020     hal.obj (.text:HAL_setTriggerPrams)
-                  00085535    0000001e     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_computeLmag_H)
-                  00085553    0000001e     spi.obj (.text:SPI_clearInterruptStatus)
-                  00085571    00000001     --HOLE-- [fill = 0]
-                  00085572    0000001d     interrupt.obj (.text:Interrupt_initVectorTable)
-                  0008558f    0000001d     rts2800_fpu32_eabi.lib : memcpy.c.obj (.text)
-                  000855ac    0000001c     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_resetLpFilters)
-                  000855c8    0000001c                            : est_Rr_flib_priv.obj (.text:EST_Rr_setParams)
-                  000855e4    0000001c                            : est_Rs_flib_priv.obj (.text:EST_Rs_setParams)
-                  00085600    0000001c                            : est_Traj_flib_priv.obj (.text:EST_Traj_init)
-                  0008561c    0000001c                            : est_flib_priv.obj (.text:EST_setFreqBetaOmega_der)
-                  00085638    0000001c     sci.obj (.text:SCI_clearInterruptStatus)
-                  00085654    0000001b     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_setFlux_ab_betaOmega_der)
-                  0008566f    0000001b     gpio.obj (.text:GPIO_setQualificationPeriod)
-                  0008568a    0000001b     hal.obj (.text:HAL_setupCPUUsageTimer)
-                  000856a5    0000001a     motor1_drive.obj (.text:initMotor1Handles)
-                  000856bf    00000019     adc.obj (.text:ADC_setVREF)
-                  000856d8    00000019     cmpss.obj (.text:CMPSS_configFilterHigh)
-                  000856f1    00000019     cmpss.obj (.text:CMPSS_configFilterLow)
-                  0008570a    00000019     motor_common.obj (.text:setupClarke_I)
-                  00085723    00000018     fast_full_lib_eabi.lib : est_Traj_flib_priv.obj (.text:EST_Traj_reset)
-                  0008573b    00000017     rts2800_fpu32_eabi.lib : boot28.asm.obj (.text)
-                  00085752    00000016     fast_full_lib_eabi.lib : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_init)
-                  00085768    00000016                            : est_Freq_flib_priv.obj (.text:EST_Freq_init)
-                  0008577e    00000016                            : est_Iab_flib_priv.obj (.text:EST_Iab_init)
-                  00085794    00000016                            : est_Iab_flib_priv.obj (.text:EST_Iab_setParams)
-                  000857aa    00000016                            : est_Idq_flib_priv.obj (.text:EST_Idq_init)
-                  000857c0    00000016                            : est_Vdq_flib_priv.obj (.text:EST_Vdq_init)
-                  000857d6    00000015     adc.obj (.text:ADC_setOffsetTrimAll)
-                  000857eb    00000015     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_setFreqBeta_lp)
-                  00085800    00000015                            : est_flib_priv.obj (.text:EST_setIab_beta_lp)
-                  00085815    00000015                            : est_flib_priv.obj (.text:EST_setIdq_beta_lp)
-                  0008582a    00000015                            : est_flib_priv.obj (.text:EST_setVdq_beta_lp)
-                  0008583f    00000014     motor_common.obj (.text:setupClarke_V)
-                  00085853    00000013     fast_full_lib_eabi.lib : est_Idq_flib_priv.obj (.text:EST_Idq_setParams)
-                  00085866    00000013     i2c.obj (.text:I2C_enableInterrupt)
-                  00085879    00000012     fast_full_lib_eabi.lib : est_Vdq_flib_priv.obj (.text:EST_Vdq_setParams)
-                  0008588b    00000012                            : est_flib_priv.obj (.text:EST_initEst)
-                  0008589d    00000012     hal.obj (.text:HAL_setMtrCMPSSDACValue)
-                  000858af    00000011     i2c.obj (.text:I2C_clearInterruptStatus)
-                  000858c0    00000011     communication.obj (.text:canaISR)
-                  000858d1    00000010     device.obj (.text:Device_initGPIO)
-                  000858e1    00000010     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_resetHpFilters)
-                  000858f1    00000010                            : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_resetDerFilters)
-                  00085901    00000010     hal.obj (.text:HAL_MTR_setGateDriver)
-                  00085911    00000010     motor_common.obj (.text:stopMotorControl)
-                  00085921    0000000f     fast_full_lib_eabi.lib : est_Flux_flib_priv.obj (.text:EST_Flux_init)
-                  00085930    0000000f                            : est_OneOverDcBus_flib_priv.obj (.text:EST_OneOverDcBus_init)
-                  0008593f    0000000f                            : est_all_setup_flib_priv.obj (.text:EST_setFreqLFP_sf)
-                  0008594e    0000000e                            : est_flib_priv.obj (.text:EST_getFlux_Wb)
-                  0008595c    0000000e                            : est_flib_priv.obj (.text:EST_getFm_lp_Hz)
-                  0008596a    0000000d     angle_gen.obj (.text:ANGLE_GEN_setParams)
-                  00085977    0000000d     hal.obj (.text:HAL_enableCtrlInts)
-                  00085984    0000000c     fast_full_lib_eabi.lib : est_all_setup_flib_priv.obj (.text:EST_setBemf_sf)
-                  00085990    0000000c                            : est_all_setup_flib_priv.obj (.text:EST_setOneOverFluxGain_sf)
-                  0008599c    0000000c     interrupt.obj (.text:Interrupt_defaultHandler)
-                  000859a8    0000000c     rts2800_fpu32_eabi.lib : args_main.c.obj (.text)
-                  000859b4    0000000b     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_setParams)
-                  000859bf    0000000a     dac128s085.obj (.text:DAC128S_init)
-                  000859c9    0000000a     fast_full_lib_eabi.lib : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_setParams)
-                  000859d3    0000000a     interrupt.obj (.text:Interrupt_illegalOperationHandler)
-                  000859dd    0000000a     interrupt.obj (.text:Interrupt_nmiHandler)
-                  000859e7    00000009     epwm.obj (.text:EPWM_setEmulationMode)
-                  000859f0    00000009     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_computePower_W)
-                  000859f9    00000009                            : est_flib_priv.obj (.text:EST_setAngle_rad)
-                  00085a02    00000009                            : inverse_flib_priv.obj (.text:INVERSE_setParams)
-                  00085a0b    00000009     rts2800_fpu32_eabi.lib : _lock.c.obj (.text)
-                  00085a14    00000008     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_enableTraj)
-                  00085a1c    00000008                            : est_flib_priv.obj (.text:EST_getLs_d_H)
-                  00085a24    00000008                            : est_flib_priv.obj (.text:EST_getLs_q_H)
-                  00085a2c    00000008                            : est_flib_priv.obj (.text:EST_getRr_Ohm)
-                  00085a34    00000008                            : est_flib_priv.obj (.text:EST_getRsOnLine_Ohm)
-                  00085a3c    00000008                            : est_flib_priv.obj (.text:EST_getRs_Ohm)
-                  00085a44    00000008                            : est_flib_priv.obj (.text:EST_isError)
-                  00085a4c    00000008                            : est_flib_priv.obj (.text:EST_isIdle)
-                  00085a54    00000008                            : est_flib_priv.obj (.text:EST_isLockRotor)
-                  00085a5c    00000008                            : est_flib_priv.obj (.text:EST_setFlag_enablePowerWarp)
-                  00085a64    00000008                            : est_flib_priv.obj (.text:EST_setLs_d_H)
-                  00085a6c    00000008                            : est_flib_priv.obj (.text:EST_setLs_q_H)
-                  00085a74    00000008                            : est_flib_priv.obj (.text:EST_setRr_Ohm)
-                  00085a7c    00000008                            : est_flib_priv.obj (.text:EST_setRsOnLineId_A)
-                  00085a84    00000008                            : est_flib_priv.obj (.text:EST_setRsOnLineId_mag_A)
-                  00085a8c    00000008                            : est_flib_priv.obj (.text:EST_setRsOnLine_Ohm)
-                  00085a94    00000008     rts2800_fpu32_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none)
-                  00085a9c    00000008     f28002x_codestartbranch.obj (.text)
-                  00085aa4    00000007     fast_full_lib_eabi.lib : est_Eab_flib_priv.obj (.text:EST_Eab_setParams)
-                  00085aab    00000007                            : est_Flux_flib_priv.obj (.text:EST_Flux_setWaitTimes)
-                  00085ab2    00000007                            : est_Freq_flib_priv.obj (.text:EST_Freq_resetDerFilter)
-                  00085ab9    00000007                            : est_Freq_flib_priv.obj (.text:EST_Freq_resetLpFilter)
-                  00085ac0    00000007                            : est_Ls_flib_priv.obj (.text:EST_Ls_setWaitTimes)
-                  00085ac7    00000007                            : est_Rr_flib_priv.obj (.text:EST_Rr_setWaitTimes)
-                  00085ace    00000007                            : est_Rs_flib_priv.obj (.text:EST_Rs_setWaitTimes)
-                  00085ad5    00000007                            : est_flib_priv.obj (.text:EST_configureTraj)
-                  00085adc    00000007                            : est_flib_priv.obj (.text:EST_disableTraj)
-                  00085ae3    00000007                            : est_flib_priv.obj (.text:EST_setMotorParams)
-                  00085aea    00000007                            : est_flib_priv.obj (.text:EST_setWaitTimes)
-                  00085af1    00000007                            : est_flib_priv.obj (.text:EST_updateTrajState)
-                  00085af8    00000007     hal.obj (.text:HAL_clearDataRAM)
-                  00085aff    00000007     rts2800_fpu32_eabi.lib : memset.c.obj (.text)
-                  00085b06    00000006     angle_gen.obj (.text:ANGLE_GEN_init)
-                  00085b0c    00000006     cputimer.obj (.text:CPUTimer_setEmulationMode)
-                  00085b12    00000006     fast_full_lib_eabi.lib : est_Traj_flib_priv.obj (.text:EST_Traj_isError)
-                  00085b18    00000006                            : est_flib_priv.obj (.text:EST_getFe_rps)
-                  00085b1e    00000006                            : est_flib_priv.obj (.text:EST_isTrajError)
-                  00085b24    00000006                            : est_flib_priv.obj (.text:EST_setId_ref_A)
-                  00085b2a    00000006                            : est_flib_priv.obj (.text:EST_setIq_ref_A)
-                  00085b30    00000006     filter_fo.obj (.text:FILTER_FO_setInitialConditions)
-                  00085b36    00000006     vs_freq.obj (.text:VS_FREQ_init)
-                  00085b3c    00000006     rts2800_fpu32_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI)
-                  00085b42    00000005     fast_full_lib_eabi.lib : est_Edq_flib_priv.obj (.text:EST_Edq_setEdq_V)
-                  00085b47    00000005                            : est_Flux_dq_flib_priv.obj (.text:EST_Flux_dq_setFlux_Wb)
-                  00085b4c    00000005                            : est_Vab_flib_priv.obj (.text:EST_Vab_setVab_V)
-                  00085b51    00000005                            : est_flib_priv.obj (.text:EST_enable)
-                  00085b56    00000005                            : est_flib_priv.obj (.text:EST_getTrajState)
-                  00085b5b    00000005     filter_fo.obj (.text:FILTER_FO_setNumCoeffs)
-                  00085b60    00000004     clarke.obj (.text:CLARKE_init)
-                  00085b64    00000004     fast_full_lib_eabi.lib : est_Angle_flib_priv.obj (.text:EST_Angle_init)
-                  00085b68    00000004                            : est_Eab_flib_priv.obj (.text:EST_Eab_init)
-                  00085b6c    00000004                            : est_Edq_flib_priv.obj (.text:EST_Edq_init)
-                  00085b70    00000004                            : est_Flux_dq_flib_priv.obj (.text:EST_Flux_dq_init)
-                  00085b74    00000004                            : est_Ls_flib_priv.obj (.text:EST_Ls_init)
-                  00085b78    00000004                            : est_Rr_flib_priv.obj (.text:EST_Rr_init)
-                  00085b7c    00000004                            : est_Rs_flib_priv.obj (.text:EST_Rs_init)
-                  00085b80    00000004                            : est_Vab_flib_priv.obj (.text:EST_Vab_init)
-                  00085b84    00000004                            : est_flib_priv.obj (.text:EST_disable)
-                  00085b88    00000004                            : est_flib_priv.obj (.text:EST_getFlag_bypassLockRotor)
-                  00085b8c    00000004                            : est_flib_priv.obj (.text:EST_getFlag_enable)
-                  00085b90    00000004                            : est_flib_priv.obj (.text:EST_getFlag_enableRsOnLine_inline)
-                  00085b94    00000004                            : est_flib_priv.obj (.text:EST_getFlag_enableRsRecalc)
-                  00085b98    00000004                            : est_flib_priv.obj (.text:EST_getRoverL_rps_inline)
-                  00085b9c    00000004                            : est_flib_priv.obj (.text:EST_isMotorIdentified)
-                  00085ba0    00000004                            : est_flib_priv.obj (.text:EST_setFlag_bypassLockRotor)
-                  00085ba4    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enable)
-                  00085ba8    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableFluxControl)
-                  00085bac    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableForceAngle)
-                  00085bb0    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableRsOnLine_inline)
-                  00085bb4    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableRsRecalc)
-                  00085bb8    00000004                            : est_flib_priv.obj (.text:EST_setFlag_updateRs)
-                  00085bbc    00000004     filter_fo.obj (.text:FILTER_FO_init)
-                  00085bc0    00000004     hal.obj (.text:HAL_enableGlobalInts)
-                  00085bc4    00000004     fast_full_lib_eabi.lib : inverse_flib_priv.obj (.text:INVERSE_init)
-                  00085bc8    00000004     ipark.obj (.text:IPARK_init)
-                  00085bcc    00000004     park.obj (.text:PARK_init)
-                  00085bd0    00000004     pi.obj (.text:PI_init)
-                  00085bd4    00000004     svgen.obj (.text:SVGEN_init)
-                  00085bd8    00000004     traj.obj (.text:TRAJ_init)
-                  00085bdc    00000003     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_checkForErrors)
-                  00085bdf    00000003                            : est_all_setup_flib_priv.obj (.text:EST_getFASTVersion)
-                  00085be2    00000003                            : est_flib_priv.obj (.text:EST_resetCounter_isr)
-                  00085be5    00000003                            : est_flib_priv.obj (.text:EST_resetCounter_state)
-                  00085be8    00000003                            : est_flib_priv.obj (.text:EST_setNumIsrTicksPerEstTick)
-                  00085beb    00000003     filter_fo.obj (.text:FILTER_FO_setDenCoeffs)
-                  00085bee    00000003     hal.obj (.text:HAL_enableDebugInt)
-                  00085bf1    00000002     rts2800_fpu32_eabi.lib : pre_init.c.obj (.text)
+                  0008375b    000001c3     sys_main.obj (.text:main)
+                  0008391e    000001be     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_reset)
+                  00083adc    0000015f     hal.obj (.text:HAL_setupPWMs)
+                  00083c3b    0000012e     sysctl.obj (.text:SysCtl_setClock)
+                  00083d69    0000010f     fast_full_lib_eabi.lib : est_Traj_flib_priv.obj (.text:EST_Traj_configure)
+                  00083e78    0000010d     motor_common.obj (.text:setupControllers)
+                  00083f85    00000001     rts2800_fpu32_eabi.lib : startup.c.obj (.text)
+                  00083f86    000000fa     hal.obj (.text:HAL_setupMtrFaults)
+                  00084080    000000da     sysctl.obj (.text:SysCtl_isPLLValid)
+                  0008415a    000000d6     motor_common.obj (.text:updateGlobalVariables)
+                  00084230    000000c6     hal.obj (.text:HAL_setupADCs)
+                  000842f6    000000c4     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_init)
+                  000843ba    000000ab                            : est_Traj_flib_priv.obj (.text:EST_Traj_setParams)
+                  00084465    000000a0     device.obj (.text:Device_enableAllPeripherals)
+                  00084505    00000086     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_setLpFilterParams)
+                  0008458b    00000086     motor_common.obj (.text:calculateRMSData)
+                  00084611    00000086     motor_common.obj (.text:resetMotorControl)
+                  00084697    0000007c     hal.obj (.text:HAL_setupCMPSSs)
+                  00084713    00000077     fast_full_lib_eabi.lib : user_flib_priv.obj (.text:USER_setParams_priv)
+                  0008478a    00000071     hal.obj (.text:HAL_setupI2CA)
+                  000847fb    00000062     sysctl.obj (.text:SysCtl_pollX1Counter)
+                  0008485d    00000061     motor_common.obj (.text:runRsOnLine)
+                  000848be    0000005c     fast_full_lib_eabi.lib : est_Flux_flib_priv.obj (.text:EST_Flux_setParams)
+                  0008491a    00000059                            : est_Traj_flib_priv.obj (.text:EST_Traj_updateState)
+                  00084973    00000058     i2c.obj (.text:I2C_initController)
+                  000849cb    00000056     dac128s085.obj (.text:DAC128S_writeData)
+                  00084a21    00000053     motor_common.obj (.text:collectRMSData)
+                  00084a74    00000052     hal.obj (.text:HAL_setupSCIA)
+                  00084ac6    0000004f     dac128s085.obj (.text:DAC128S_setupSPI)
+                  00084b15    0000004f     motor_common.obj (.text:restartMotorControl)
+                  00084b64    0000004e     fast_full_lib_eabi.lib : est_Freq_flib_priv.obj (.text:EST_Freq_setParams)
+                  00084bb2    0000004a                            : est_Dir_flib_priv.obj (.text:EST_Dir_setHpFilterParams)
+                  00084bfc    0000004a                            : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_setDerFilterParams)
+                  00084c46    0000004a                            : est_Iab_flib_priv.obj (.text:EST_Iab_setLpFilterParams)
+                  00084c90    0000004a                            : est_Idq_flib_priv.obj (.text:EST_Idq_setLpFilterParams)
+                  00084cda    0000004a                            : est_Vdq_flib_priv.obj (.text:EST_Vdq_setLpFilterParams)
+                  00084d24    00000048     sysctl.obj (.text:SysCtl_selectXTAL)
+                  00084d6c    00000045     fast_full_lib_eabi.lib : est_RsOnLine_flib_priv.obj (.text:EST_RsOnLine_setParams)
+                  00084db1    00000041     interrupt.obj (.text:Interrupt_initModule)
+                  00084df2    0000003f     fast_full_lib_eabi.lib : est_Ls_flib_priv.obj (.text:EST_Ls_setParams)
+                  00084e31    0000003f     gpio.obj (.text:GPIO_setPadConfig)
+                  00084e70    0000003d     fast_full_lib_eabi.lib : est_RsOnLine_flib_priv.obj (.text:EST_RsOnLine_setLpFilterParams)
+                  00084ead    0000003a                            : est_Flux_flib_priv.obj (.text:EST_Flux_updateState)
+                  00084ee7    0000003a     vs_freq.obj (.text:VS_FREQ_setProfile)
+                  00084f21    00000037     device.obj (.text:Device_init)
+                  00084f58    00000036     interrupt.obj (.text:Interrupt_enable)
+                  00084f8e    00000035     fast_full_lib_eabi.lib : est_Ls_flib_priv.obj (.text:EST_Ls_updateState)
+                  00084fc3    00000033                            : est_Rr_flib_priv.obj (.text:EST_Rr_updateState)
+                  00084ff6    00000033                            : est_Rs_flib_priv.obj (.text:EST_Rs_updateState)
+                  00085029    00000032     hal.obj (.text:HAL_enableDRV)
+                  0008505b    00000031     dac128s085.obj (.text:DAC128S_writeCommand)
+                  0008508c    00000031     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_init)
+                  000850bd    00000030     gpio.obj (.text:GPIO_setPinConfig)
+                  000850ed    00000030     rts2800_fpu32_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  0008511d    0000002f     motor_common.obj (.text:calcMotorOverCurrentThreshold)
+                  0008514c    0000002e     fast_full_lib_eabi.lib : est_Iab_flib_priv.obj (.text:EST_Iab_resetLpFilters)
+                  0008517a    0000002e     hal.obj (.text:HAL_MTR1_init)
+                  000851a8    0000002d     hal.obj (.text:HAL_init)
+                  000851d5    0000002b     sci.obj (.text:SCI_setConfig)
+                  00085200    0000002b     xbar.obj (.text:XBAR_setEPWMMuxConfig)
+                  0008522b    0000002b     rts2800_fpu32_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  00085256    0000002a     fast_full_lib_eabi.lib : est_Freq_flib_priv.obj (.text:EST_Freq_setDerFilterParams)
+                  00085280    0000002a                            : est_Freq_flib_priv.obj (.text:EST_Freq_setLpFilterParams)
+                  000852aa    0000002a                            : est_Vdq_flib_priv.obj (.text:EST_Vdq_resetLpFilters)
+                  000852d4    0000002a     hal.obj (.text:HAL_setupTimeBaseTimer)
+                  000852fe    00000029     fast_full_lib_eabi.lib : est_OneOverDcBus_flib_priv.obj (.text:EST_OneOverDcBus_setParams)
+                  00085327    00000029                            : est_RsOnLine_flib_priv.obj (.text:EST_RsOnLine_init)
+                  00085350    00000029                            : est_flib_priv.obj (.text:EST_setFluxBeta_lp)
+                  00085379    00000029     hal.obj (.text:HAL_MTR_setParams)
+                  000853a2    00000029     rts2800_fpu32_eabi.lib : exit.c.obj (.text)
+                  000853cb    00000028     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_computeTorque_Nm)
+                  000853f3    00000026                            : est_Angle_flib_priv.obj (.text:EST_Angle_setParams)
+                  00085419    00000026                            : est_Idq_flib_priv.obj (.text:EST_Idq_resetLpFilters)
+                  0008543f    00000026     spi.obj (.text:SPI_setConfig)
+                  00085465    00000026     sysctl.obj (.text:SysCtl_selectOscSource)
+                  0008548b    00000024     hal.obj (.text:HAL_setParams)
+                  000854af    00000022     gpio.obj (.text:GPIO_setQualificationMode)
+                  000854d1    00000022     sysctl.obj (.text:SysCtl_selectXTALSingleEnded)
+                  000854f3    00000020     gpio.obj (.text:GPIO_setDirectionMode)
+                  00085513    00000020     hal.obj (.text:HAL_setTriggerPrams)
+                  00085533    0000001e     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_computeLmag_H)
+                  00085551    0000001e     spi.obj (.text:SPI_clearInterruptStatus)
+                  0008556f    00000001     --HOLE-- [fill = 0]
+                  00085570    0000001d     interrupt.obj (.text:Interrupt_initVectorTable)
+                  0008558d    0000001d     rts2800_fpu32_eabi.lib : memcpy.c.obj (.text)
+                  000855aa    0000001c     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_resetLpFilters)
+                  000855c6    0000001c                            : est_Rr_flib_priv.obj (.text:EST_Rr_setParams)
+                  000855e2    0000001c                            : est_Rs_flib_priv.obj (.text:EST_Rs_setParams)
+                  000855fe    0000001c                            : est_Traj_flib_priv.obj (.text:EST_Traj_init)
+                  0008561a    0000001c                            : est_flib_priv.obj (.text:EST_setFreqBetaOmega_der)
+                  00085636    0000001c     sci.obj (.text:SCI_clearInterruptStatus)
+                  00085652    0000001b     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_setFlux_ab_betaOmega_der)
+                  0008566d    0000001b     gpio.obj (.text:GPIO_setQualificationPeriod)
+                  00085688    0000001b     hal.obj (.text:HAL_setupCPUUsageTimer)
+                  000856a3    0000001a     motor1_drive.obj (.text:initMotor1Handles)
+                  000856bd    00000019     adc.obj (.text:ADC_setVREF)
+                  000856d6    00000019     cmpss.obj (.text:CMPSS_configFilterHigh)
+                  000856ef    00000019     cmpss.obj (.text:CMPSS_configFilterLow)
+                  00085708    00000019     motor_common.obj (.text:setupClarke_I)
+                  00085721    00000018     fast_full_lib_eabi.lib : est_Traj_flib_priv.obj (.text:EST_Traj_reset)
+                  00085739    00000017     rts2800_fpu32_eabi.lib : boot28.asm.obj (.text)
+                  00085750    00000016     fast_full_lib_eabi.lib : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_init)
+                  00085766    00000016                            : est_Freq_flib_priv.obj (.text:EST_Freq_init)
+                  0008577c    00000016                            : est_Iab_flib_priv.obj (.text:EST_Iab_init)
+                  00085792    00000016                            : est_Iab_flib_priv.obj (.text:EST_Iab_setParams)
+                  000857a8    00000016                            : est_Idq_flib_priv.obj (.text:EST_Idq_init)
+                  000857be    00000016                            : est_Vdq_flib_priv.obj (.text:EST_Vdq_init)
+                  000857d4    00000015     adc.obj (.text:ADC_setOffsetTrimAll)
+                  000857e9    00000015     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_setFreqBeta_lp)
+                  000857fe    00000015                            : est_flib_priv.obj (.text:EST_setIab_beta_lp)
+                  00085813    00000015                            : est_flib_priv.obj (.text:EST_setIdq_beta_lp)
+                  00085828    00000015                            : est_flib_priv.obj (.text:EST_setVdq_beta_lp)
+                  0008583d    00000014     motor_common.obj (.text:setupClarke_V)
+                  00085851    00000013     fast_full_lib_eabi.lib : est_Idq_flib_priv.obj (.text:EST_Idq_setParams)
+                  00085864    00000013     i2c.obj (.text:I2C_enableInterrupt)
+                  00085877    00000012     fast_full_lib_eabi.lib : est_Vdq_flib_priv.obj (.text:EST_Vdq_setParams)
+                  00085889    00000012                            : est_flib_priv.obj (.text:EST_initEst)
+                  0008589b    00000012     hal.obj (.text:HAL_setMtrCMPSSDACValue)
+                  000858ad    00000011     i2c.obj (.text:I2C_clearInterruptStatus)
+                  000858be    00000011     communication.obj (.text:canaISR)
+                  000858cf    00000010     device.obj (.text:Device_initGPIO)
+                  000858df    00000010     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_resetHpFilters)
+                  000858ef    00000010                            : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_resetDerFilters)
+                  000858ff    00000010     hal.obj (.text:HAL_MTR_setGateDriver)
+                  0008590f    00000010     motor_common.obj (.text:stopMotorControl)
+                  0008591f    0000000f     fast_full_lib_eabi.lib : est_Flux_flib_priv.obj (.text:EST_Flux_init)
+                  0008592e    0000000f                            : est_OneOverDcBus_flib_priv.obj (.text:EST_OneOverDcBus_init)
+                  0008593d    0000000f                            : est_all_setup_flib_priv.obj (.text:EST_setFreqLFP_sf)
+                  0008594c    0000000e                            : est_flib_priv.obj (.text:EST_getFlux_Wb)
+                  0008595a    0000000e                            : est_flib_priv.obj (.text:EST_getFm_lp_Hz)
+                  00085968    0000000d     angle_gen.obj (.text:ANGLE_GEN_setParams)
+                  00085975    0000000d     hal.obj (.text:HAL_enableCtrlInts)
+                  00085982    0000000c     fast_full_lib_eabi.lib : est_all_setup_flib_priv.obj (.text:EST_setBemf_sf)
+                  0008598e    0000000c                            : est_all_setup_flib_priv.obj (.text:EST_setOneOverFluxGain_sf)
+                  0008599a    0000000c     interrupt.obj (.text:Interrupt_defaultHandler)
+                  000859a6    0000000c     rts2800_fpu32_eabi.lib : args_main.c.obj (.text)
+                  000859b2    0000000b     fast_full_lib_eabi.lib : est_Dir_flib_priv.obj (.text:EST_Dir_setParams)
+                  000859bd    0000000a     dac128s085.obj (.text:DAC128S_init)
+                  000859c7    0000000a     fast_full_lib_eabi.lib : est_Flux_ab_flib_priv.obj (.text:EST_Flux_ab_setParams)
+                  000859d1    0000000a     interrupt.obj (.text:Interrupt_illegalOperationHandler)
+                  000859db    0000000a     interrupt.obj (.text:Interrupt_nmiHandler)
+                  000859e5    00000009     epwm.obj (.text:EPWM_setEmulationMode)
+                  000859ee    00000009     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_computePower_W)
+                  000859f7    00000009                            : est_flib_priv.obj (.text:EST_setAngle_rad)
+                  00085a00    00000009                            : inverse_flib_priv.obj (.text:INVERSE_setParams)
+                  00085a09    00000009     rts2800_fpu32_eabi.lib : _lock.c.obj (.text)
+                  00085a12    00000008     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_enableTraj)
+                  00085a1a    00000008                            : est_flib_priv.obj (.text:EST_getLs_d_H)
+                  00085a22    00000008                            : est_flib_priv.obj (.text:EST_getLs_q_H)
+                  00085a2a    00000008                            : est_flib_priv.obj (.text:EST_getRr_Ohm)
+                  00085a32    00000008                            : est_flib_priv.obj (.text:EST_getRsOnLine_Ohm)
+                  00085a3a    00000008                            : est_flib_priv.obj (.text:EST_getRs_Ohm)
+                  00085a42    00000008                            : est_flib_priv.obj (.text:EST_isError)
+                  00085a4a    00000008                            : est_flib_priv.obj (.text:EST_isIdle)
+                  00085a52    00000008                            : est_flib_priv.obj (.text:EST_isLockRotor)
+                  00085a5a    00000008                            : est_flib_priv.obj (.text:EST_setFlag_enablePowerWarp)
+                  00085a62    00000008                            : est_flib_priv.obj (.text:EST_setLs_d_H)
+                  00085a6a    00000008                            : est_flib_priv.obj (.text:EST_setLs_q_H)
+                  00085a72    00000008                            : est_flib_priv.obj (.text:EST_setRr_Ohm)
+                  00085a7a    00000008                            : est_flib_priv.obj (.text:EST_setRsOnLineId_A)
+                  00085a82    00000008                            : est_flib_priv.obj (.text:EST_setRsOnLineId_mag_A)
+                  00085a8a    00000008                            : est_flib_priv.obj (.text:EST_setRsOnLine_Ohm)
+                  00085a92    00000008     rts2800_fpu32_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none)
+                  00085a9a    00000008     f28002x_codestartbranch.obj (.text)
+                  00085aa2    00000007     fast_full_lib_eabi.lib : est_Eab_flib_priv.obj (.text:EST_Eab_setParams)
+                  00085aa9    00000007                            : est_Flux_flib_priv.obj (.text:EST_Flux_setWaitTimes)
+                  00085ab0    00000007                            : est_Freq_flib_priv.obj (.text:EST_Freq_resetDerFilter)
+                  00085ab7    00000007                            : est_Freq_flib_priv.obj (.text:EST_Freq_resetLpFilter)
+                  00085abe    00000007                            : est_Ls_flib_priv.obj (.text:EST_Ls_setWaitTimes)
+                  00085ac5    00000007                            : est_Rr_flib_priv.obj (.text:EST_Rr_setWaitTimes)
+                  00085acc    00000007                            : est_Rs_flib_priv.obj (.text:EST_Rs_setWaitTimes)
+                  00085ad3    00000007                            : est_flib_priv.obj (.text:EST_configureTraj)
+                  00085ada    00000007                            : est_flib_priv.obj (.text:EST_disableTraj)
+                  00085ae1    00000007                            : est_flib_priv.obj (.text:EST_setMotorParams)
+                  00085ae8    00000007                            : est_flib_priv.obj (.text:EST_setWaitTimes)
+                  00085aef    00000007                            : est_flib_priv.obj (.text:EST_updateTrajState)
+                  00085af6    00000007     hal.obj (.text:HAL_clearDataRAM)
+                  00085afd    00000007     rts2800_fpu32_eabi.lib : memset.c.obj (.text)
+                  00085b04    00000006     angle_gen.obj (.text:ANGLE_GEN_init)
+                  00085b0a    00000006     cputimer.obj (.text:CPUTimer_setEmulationMode)
+                  00085b10    00000006     fast_full_lib_eabi.lib : est_Traj_flib_priv.obj (.text:EST_Traj_isError)
+                  00085b16    00000006                            : est_flib_priv.obj (.text:EST_getFe_rps)
+                  00085b1c    00000006                            : est_flib_priv.obj (.text:EST_isTrajError)
+                  00085b22    00000006                            : est_flib_priv.obj (.text:EST_setId_ref_A)
+                  00085b28    00000006                            : est_flib_priv.obj (.text:EST_setIq_ref_A)
+                  00085b2e    00000006     filter_fo.obj (.text:FILTER_FO_setInitialConditions)
+                  00085b34    00000006     vs_freq.obj (.text:VS_FREQ_init)
+                  00085b3a    00000006     rts2800_fpu32_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI)
+                  00085b40    00000005     fast_full_lib_eabi.lib : est_Edq_flib_priv.obj (.text:EST_Edq_setEdq_V)
+                  00085b45    00000005                            : est_Flux_dq_flib_priv.obj (.text:EST_Flux_dq_setFlux_Wb)
+                  00085b4a    00000005                            : est_Vab_flib_priv.obj (.text:EST_Vab_setVab_V)
+                  00085b4f    00000005                            : est_flib_priv.obj (.text:EST_enable)
+                  00085b54    00000005                            : est_flib_priv.obj (.text:EST_getTrajState)
+                  00085b59    00000005     filter_fo.obj (.text:FILTER_FO_setNumCoeffs)
+                  00085b5e    00000004     clarke.obj (.text:CLARKE_init)
+                  00085b62    00000004     fast_full_lib_eabi.lib : est_Angle_flib_priv.obj (.text:EST_Angle_init)
+                  00085b66    00000004                            : est_Eab_flib_priv.obj (.text:EST_Eab_init)
+                  00085b6a    00000004                            : est_Edq_flib_priv.obj (.text:EST_Edq_init)
+                  00085b6e    00000004                            : est_Flux_dq_flib_priv.obj (.text:EST_Flux_dq_init)
+                  00085b72    00000004                            : est_Ls_flib_priv.obj (.text:EST_Ls_init)
+                  00085b76    00000004                            : est_Rr_flib_priv.obj (.text:EST_Rr_init)
+                  00085b7a    00000004                            : est_Rs_flib_priv.obj (.text:EST_Rs_init)
+                  00085b7e    00000004                            : est_Vab_flib_priv.obj (.text:EST_Vab_init)
+                  00085b82    00000004                            : est_flib_priv.obj (.text:EST_disable)
+                  00085b86    00000004                            : est_flib_priv.obj (.text:EST_getFlag_bypassLockRotor)
+                  00085b8a    00000004                            : est_flib_priv.obj (.text:EST_getFlag_enable)
+                  00085b8e    00000004                            : est_flib_priv.obj (.text:EST_getFlag_enableRsOnLine_inline)
+                  00085b92    00000004                            : est_flib_priv.obj (.text:EST_getFlag_enableRsRecalc)
+                  00085b96    00000004                            : est_flib_priv.obj (.text:EST_getRoverL_rps_inline)
+                  00085b9a    00000004                            : est_flib_priv.obj (.text:EST_isMotorIdentified)
+                  00085b9e    00000004                            : est_flib_priv.obj (.text:EST_setFlag_bypassLockRotor)
+                  00085ba2    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enable)
+                  00085ba6    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableFluxControl)
+                  00085baa    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableForceAngle)
+                  00085bae    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableRsOnLine_inline)
+                  00085bb2    00000004                            : est_flib_priv.obj (.text:EST_setFlag_enableRsRecalc)
+                  00085bb6    00000004                            : est_flib_priv.obj (.text:EST_setFlag_updateRs)
+                  00085bba    00000004     filter_fo.obj (.text:FILTER_FO_init)
+                  00085bbe    00000004     hal.obj (.text:HAL_enableGlobalInts)
+                  00085bc2    00000004     fast_full_lib_eabi.lib : inverse_flib_priv.obj (.text:INVERSE_init)
+                  00085bc6    00000004     ipark.obj (.text:IPARK_init)
+                  00085bca    00000004     park.obj (.text:PARK_init)
+                  00085bce    00000004     pi.obj (.text:PI_init)
+                  00085bd2    00000004     svgen.obj (.text:SVGEN_init)
+                  00085bd6    00000004     traj.obj (.text:TRAJ_init)
+                  00085bda    00000003     fast_full_lib_eabi.lib : est_flib_priv.obj (.text:EST_checkForErrors)
+                  00085bdd    00000003                            : est_all_setup_flib_priv.obj (.text:EST_getFASTVersion)
+                  00085be0    00000003                            : est_flib_priv.obj (.text:EST_resetCounter_isr)
+                  00085be3    00000003                            : est_flib_priv.obj (.text:EST_resetCounter_state)
+                  00085be6    00000003                            : est_flib_priv.obj (.text:EST_setNumIsrTicksPerEstTick)
+                  00085be9    00000003     filter_fo.obj (.text:FILTER_FO_setDenCoeffs)
+                  00085bec    00000003     hal.obj (.text:HAL_enableDebugInt)
+                  00085bef    00000002     rts2800_fpu32_eabi.lib : pre_init.c.obj (.text)
 
 .cinit     0    0008e000    0000003c     
                   0008e000    00000009     (.cinit..data.load) [load image, compression = lzss]
@@ -465,9 +465,9 @@ MODULE SUMMARY
        Module                           code    ro data   rw data
        ------                           ----    -------   -------
     .\
-       sys_main.obj                     453     0         50     
+       sys_main.obj                     451     0         50     
     +--+--------------------------------+-------+---------+---------+
-       Total:                           453     0         50     
+       Total:                           451     0         50     
                                                                  
     .\libraries\control\pi\
        pi.obj                           4       0         0      
@@ -601,7 +601,7 @@ MODULE SUMMARY
        Stack:                           0       0         256    
        Linker Generated:                0       59        0      
     +--+--------------------------------+-------+---------+---------+
-       Grand Total:                     23764   135       2734   
+       Grand Total:                     23762   135       2734   
 
 
 LINKER GENERATED COPY TABLES
@@ -672,236 +672,236 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                             
 ----  -------   ----                             
-0     000857d6  ADC_setOffsetTrimAll             
-0     000856bf  ADC_setVREF                      
-0     00085b06  ANGLE_GEN_init                   
-0     0008596a  ANGLE_GEN_setParams              
-0     000853a4  C$$EXIT                          
-0     00085b60  CLARKE_init                      
-0     000856d8  CMPSS_configFilterHigh           
-0     000856f1  CMPSS_configFilterLow            
-0     00085b0c  CPUTimer_setEmulationMode        
-0     000859bf  DAC128S_init                     
-0     00084ac8  DAC128S_setupSPI                 
-0     0008505d  DAC128S_writeCommand             
-0     000849cd  DAC128S_writeData                
-0     00084467  Device_enableAllPeripherals      
-0     00084f23  Device_init                      
-0     000858d1  Device_initGPIO                  
-0     000859e7  EPWM_setEmulationMode            
-0     00085b64  EST_Angle_init                   
-0     000853f5  EST_Angle_setParams              
-0     0008508e  EST_Dir_init                     
-0     000858e1  EST_Dir_resetHpFilters           
-0     000855ac  EST_Dir_resetLpFilters           
-0     00084bb4  EST_Dir_setHpFilterParams        
-0     00084507  EST_Dir_setLpFilterParams        
-0     000859b4  EST_Dir_setParams                
-0     00085b68  EST_Eab_init                     
-0     00085aa4  EST_Eab_setParams                
-0     00085b6c  EST_Edq_init                     
-0     00085b42  EST_Edq_setParams                
-0     00085752  EST_Flux_ab_init                 
-0     000858f1  EST_Flux_ab_resetDerFilters      
-0     00084bfe  EST_Flux_ab_setDerFilterParams   
-0     000859c9  EST_Flux_ab_setParams            
-0     00085b70  EST_Flux_dq_init                 
-0     00085b47  EST_Flux_dq_setParams            
-0     00085921  EST_Flux_init                    
-0     000848c0  EST_Flux_setParams               
-0     00085aab  EST_Flux_setWaitTimes            
-0     00084eaf  EST_Flux_updateState             
-0     00085768  EST_Freq_init                    
-0     00085ab2  EST_Freq_resetDerFilter          
-0     00085ab9  EST_Freq_resetLpFilter           
-0     00085258  EST_Freq_setDerFilterParams      
-0     00085282  EST_Freq_setLpFilterParams       
-0     00084b66  EST_Freq_setParams               
-0     0008577e  EST_Iab_init                     
-0     0008514e  EST_Iab_resetLpFilters           
-0     00084c48  EST_Iab_setLpFilterParams        
-0     00085794  EST_Iab_setParams                
-0     000857aa  EST_Idq_init                     
-0     0008541b  EST_Idq_resetLpFilters           
-0     00084c92  EST_Idq_setLpFilterParams        
-0     00085853  EST_Idq_setParams                
-0     00085b74  EST_Ls_init                      
-0     00084df4  EST_Ls_setParams                 
-0     00085ac0  EST_Ls_setWaitTimes              
-0     00084f90  EST_Ls_updateState               
-0     00085930  EST_OneOverDcBus_init            
-0     00085300  EST_OneOverDcBus_setParams       
-0     00085b78  EST_Rr_init                      
-0     000855c8  EST_Rr_setParams                 
-0     00085ac7  EST_Rr_setWaitTimes              
-0     00084fc5  EST_Rr_updateState               
-0     00085329  EST_RsOnLine_init                
-0     00084e72  EST_RsOnLine_setLpFilterParams   
-0     00084d6e  EST_RsOnLine_setParams           
-0     00085b7c  EST_Rs_init                      
-0     000855e4  EST_Rs_setParams                 
-0     00085ace  EST_Rs_setWaitTimes              
-0     00084ff8  EST_Rs_updateState               
-0     00083d6b  EST_Traj_configure               
-0     00085600  EST_Traj_init                    
-0     00085b12  EST_Traj_isError                 
-0     00085723  EST_Traj_reset                   
+0     000857d4  ADC_setOffsetTrimAll             
+0     000856bd  ADC_setVREF                      
+0     00085b04  ANGLE_GEN_init                   
+0     00085968  ANGLE_GEN_setParams              
+0     000853a2  C$$EXIT                          
+0     00085b5e  CLARKE_init                      
+0     000856d6  CMPSS_configFilterHigh           
+0     000856ef  CMPSS_configFilterLow            
+0     00085b0a  CPUTimer_setEmulationMode        
+0     000859bd  DAC128S_init                     
+0     00084ac6  DAC128S_setupSPI                 
+0     0008505b  DAC128S_writeCommand             
+0     000849cb  DAC128S_writeData                
+0     00084465  Device_enableAllPeripherals      
+0     00084f21  Device_init                      
+0     000858cf  Device_initGPIO                  
+0     000859e5  EPWM_setEmulationMode            
+0     00085b62  EST_Angle_init                   
+0     000853f3  EST_Angle_setParams              
+0     0008508c  EST_Dir_init                     
+0     000858df  EST_Dir_resetHpFilters           
+0     000855aa  EST_Dir_resetLpFilters           
+0     00084bb2  EST_Dir_setHpFilterParams        
+0     00084505  EST_Dir_setLpFilterParams        
+0     000859b2  EST_Dir_setParams                
+0     00085b66  EST_Eab_init                     
+0     00085aa2  EST_Eab_setParams                
+0     00085b6a  EST_Edq_init                     
+0     00085b40  EST_Edq_setParams                
+0     00085750  EST_Flux_ab_init                 
+0     000858ef  EST_Flux_ab_resetDerFilters      
+0     00084bfc  EST_Flux_ab_setDerFilterParams   
+0     000859c7  EST_Flux_ab_setParams            
+0     00085b6e  EST_Flux_dq_init                 
+0     00085b45  EST_Flux_dq_setParams            
+0     0008591f  EST_Flux_init                    
+0     000848be  EST_Flux_setParams               
+0     00085aa9  EST_Flux_setWaitTimes            
+0     00084ead  EST_Flux_updateState             
+0     00085766  EST_Freq_init                    
+0     00085ab0  EST_Freq_resetDerFilter          
+0     00085ab7  EST_Freq_resetLpFilter           
+0     00085256  EST_Freq_setDerFilterParams      
+0     00085280  EST_Freq_setLpFilterParams       
+0     00084b64  EST_Freq_setParams               
+0     0008577c  EST_Iab_init                     
+0     0008514c  EST_Iab_resetLpFilters           
+0     00084c46  EST_Iab_setLpFilterParams        
+0     00085792  EST_Iab_setParams                
+0     000857a8  EST_Idq_init                     
+0     00085419  EST_Idq_resetLpFilters           
+0     00084c90  EST_Idq_setLpFilterParams        
+0     00085851  EST_Idq_setParams                
+0     00085b72  EST_Ls_init                      
+0     00084df2  EST_Ls_setParams                 
+0     00085abe  EST_Ls_setWaitTimes              
+0     00084f8e  EST_Ls_updateState               
+0     0008592e  EST_OneOverDcBus_init            
+0     000852fe  EST_OneOverDcBus_setParams       
+0     00085b76  EST_Rr_init                      
+0     000855c6  EST_Rr_setParams                 
+0     00085ac5  EST_Rr_setWaitTimes              
+0     00084fc3  EST_Rr_updateState               
+0     00085327  EST_RsOnLine_init                
+0     00084e70  EST_RsOnLine_setLpFilterParams   
+0     00084d6c  EST_RsOnLine_setParams           
+0     00085b7a  EST_Rs_init                      
+0     000855e2  EST_Rs_setParams                 
+0     00085acc  EST_Rs_setWaitTimes              
+0     00084ff6  EST_Rs_updateState               
+0     00083d69  EST_Traj_configure               
+0     000855fe  EST_Traj_init                    
+0     00085b10  EST_Traj_isError                 
+0     00085721  EST_Traj_reset                   
 0     0000b800  EST_Traj_run                     
-0     000843bc  EST_Traj_setParams               
-0     0008491c  EST_Traj_updateState             
-0     00085b80  EST_Vab_init                     
-0     00085b4c  EST_Vab_setParams                
-0     000857c0  EST_Vdq_init                     
-0     000852ac  EST_Vdq_resetLpFilters           
-0     00084cdc  EST_Vdq_setLpFilterParams        
-0     00085879  EST_Vdq_setParams                
-0     00085bdc  EST_checkForErrors               
-0     00085535  EST_computeLmag_H                
-0     000859f0  EST_computePower_W               
-0     000853cd  EST_computeTorque_Nm             
-0     00085ad5  EST_configureTraj                
+0     000843ba  EST_Traj_setParams               
+0     0008491a  EST_Traj_updateState             
+0     00085b7e  EST_Vab_init                     
+0     00085b4a  EST_Vab_setParams                
+0     000857be  EST_Vdq_init                     
+0     000852aa  EST_Vdq_resetLpFilters           
+0     00084cda  EST_Vdq_setLpFilterParams        
+0     00085877  EST_Vdq_setParams                
+0     00085bda  EST_checkForErrors               
+0     00085533  EST_computeLmag_H                
+0     000859ee  EST_computePower_W               
+0     000853cb  EST_computeTorque_Nm             
+0     00085ad3  EST_configureTraj                
 0     0000b4ba  EST_configureTrajState           
-0     00085b84  EST_disable                      
-0     00085adc  EST_disableTraj                  
+0     00085b82  EST_disable                      
+0     00085ada  EST_disableTraj                  
 0     0000b8b2  EST_doCurrentCtrl                
 0     0000b89c  EST_doSpeedCtrl                  
-0     00085b51  EST_enable                       
-0     00085a14  EST_enableTraj                   
-0     00085bdf  EST_getFASTVersion               
-0     00085b18  EST_getFe_rps                    
-0     00085b88  EST_getFlag_bypassLockRotor      
-0     00085b8c  EST_getFlag_enable               
-0     00085b90  EST_getFlag_enableRsOnLine       
-0     00085b94  EST_getFlag_enableRsRecalc       
-0     0008594e  EST_getFlux_Wb                   
-0     0008595c  EST_getFm_lp_Hz                  
+0     00085b4f  EST_enable                       
+0     00085a12  EST_enableTraj                   
+0     00085bdd  EST_getFASTVersion               
+0     00085b16  EST_getFe_rps                    
+0     00085b86  EST_getFlag_bypassLockRotor      
+0     00085b8a  EST_getFlag_enable               
+0     00085b8e  EST_getFlag_enableRsOnLine       
+0     00085b92  EST_getFlag_enableRsRecalc       
+0     0008594c  EST_getFlux_Wb                   
+0     0008595a  EST_getFm_lp_Hz                  
 0     0000b8c5  EST_getIdRated_A                 
 0     0000b8cd  EST_getIntValue_Id_A             
 0     0000b8bc  EST_getIntValue_spd_Hz           
-0     00085a1c  EST_getLs_d_H                    
-0     00085a24  EST_getLs_q_H                    
-0     00085b98  EST_getRoverL_rps                
-0     00085a2c  EST_getRr_Ohm                    
-0     00085a34  EST_getRsOnLine_Ohm              
-0     00085a3c  EST_getRs_Ohm                    
+0     00085a1a  EST_getLs_d_H                    
+0     00085a22  EST_getLs_q_H                    
+0     00085b96  EST_getRoverL_rps                
+0     00085a2a  EST_getRr_Ohm                    
+0     00085a32  EST_getRsOnLine_Ohm              
+0     00085a3a  EST_getRs_Ohm                    
 0     0000b8e2  EST_getState                     
-0     00085b56  EST_getTrajState                 
-0     000842f8  EST_init                         
-0     0008588b  EST_initEst                      
+0     00085b54  EST_getTrajState                 
+0     000842f6  EST_init                         
+0     00085889  EST_initEst                      
 0     0000b8da  EST_isEnabled                    
-0     00085a44  EST_isError                      
-0     00085a4c  EST_isIdle                       
-0     00085a54  EST_isLockRotor                  
-0     00085b9c  EST_isMotorIdentified            
-0     00085b1e  EST_isTrajError                  
-0     00083920  EST_reset                        
-0     00085be2  EST_resetCounter_isr             
-0     00085be5  EST_resetCounter_state           
+0     00085a42  EST_isError                      
+0     00085a4a  EST_isIdle                       
+0     00085a52  EST_isLockRotor                  
+0     00085b9a  EST_isMotorIdentified            
+0     00085b1c  EST_isTrajError                  
+0     0008391e  EST_reset                        
+0     00085be0  EST_resetCounter_isr             
+0     00085be3  EST_resetCounter_state           
 0     0000b6cd  EST_run                          
 0     0000b8d4  EST_runTraj                      
-0     000859f9  EST_setAngle_rad                 
-0     00085984  EST_setBemf_sf                   
-0     00085ba0  EST_setFlag_bypassLockRotor      
-0     00085ba4  EST_setFlag_enable               
-0     00085ba8  EST_setFlag_enableFluxControl    
-0     00085bac  EST_setFlag_enableForceAngle     
-0     00085a5c  EST_setFlag_enablePowerWarp      
-0     00085bb0  EST_setFlag_enableRsOnLine       
-0     00085bb4  EST_setFlag_enableRsRecalc       
-0     00085bb8  EST_setFlag_updateRs             
-0     00085352  EST_setFluxBeta_lp               
-0     00085654  EST_setFlux_ab_betaOmega_der     
-0     0008561c  EST_setFreqBetaOmega_der         
-0     000857eb  EST_setFreqBeta_lp               
-0     0008593f  EST_setFreqLFP_sf                
-0     00085800  EST_setIab_beta_lp               
-0     00085b24  EST_setId_ref_A                  
-0     00085815  EST_setIdq_beta_lp               
-0     00085b2a  EST_setIq_ref_A                  
-0     00085a64  EST_setLs_d_H                    
-0     00085a6c  EST_setLs_q_H                    
-0     00085ae3  EST_setMotorParams               
-0     00085be8  EST_setNumIsrTicksPerEstTick     
-0     00085990  EST_setOneOverFluxGain_sf        
+0     000859f7  EST_setAngle_rad                 
+0     00085982  EST_setBemf_sf                   
+0     00085b9e  EST_setFlag_bypassLockRotor      
+0     00085ba2  EST_setFlag_enable               
+0     00085ba6  EST_setFlag_enableFluxControl    
+0     00085baa  EST_setFlag_enableForceAngle     
+0     00085a5a  EST_setFlag_enablePowerWarp      
+0     00085bae  EST_setFlag_enableRsOnLine       
+0     00085bb2  EST_setFlag_enableRsRecalc       
+0     00085bb6  EST_setFlag_updateRs             
+0     00085350  EST_setFluxBeta_lp               
+0     00085652  EST_setFlux_ab_betaOmega_der     
+0     0008561a  EST_setFreqBetaOmega_der         
+0     000857e9  EST_setFreqBeta_lp               
+0     0008593d  EST_setFreqLFP_sf                
+0     000857fe  EST_setIab_beta_lp               
+0     00085b22  EST_setId_ref_A                  
+0     00085813  EST_setIdq_beta_lp               
+0     00085b28  EST_setIq_ref_A                  
+0     00085a62  EST_setLs_d_H                    
+0     00085a6a  EST_setLs_q_H                    
+0     00085ae1  EST_setMotorParams               
+0     00085be6  EST_setNumIsrTicksPerEstTick     
+0     0008598e  EST_setOneOverFluxGain_sf        
 0     000820e8  EST_setParams                    
-0     00085a74  EST_setRr_Ohm                    
-0     00085a7c  EST_setRsOnLineId_A              
-0     00085a84  EST_setRsOnLineId_mag_A          
-0     00085a8c  EST_setRsOnLine_Ohm              
-0     0008582a  EST_setVdq_beta_lp               
-0     00085aea  EST_setWaitTimes                 
+0     00085a72  EST_setRr_Ohm                    
+0     00085a7a  EST_setRsOnLineId_A              
+0     00085a82  EST_setRsOnLineId_mag_A          
+0     00085a8a  EST_setRsOnLine_Ohm              
+0     00085828  EST_setVdq_beta_lp               
+0     00085ae8  EST_setWaitTimes                 
 0     0000b781  EST_setupTrajState               
 0     00083099  EST_updateState                  
-0     00085af1  EST_updateTrajState              
-0     00085bbc  FILTER_FO_init                   
-0     00085beb  FILTER_FO_setDenCoeffs           
-0     00085b30  FILTER_FO_setInitialConditions   
-0     00085b5b  FILTER_FO_setNumCoeffs           
+0     00085aef  EST_updateTrajState              
+0     00085bba  FILTER_FO_init                   
+0     00085be9  FILTER_FO_setDenCoeffs           
+0     00085b2e  FILTER_FO_setInitialConditions   
+0     00085b59  FILTER_FO_setNumCoeffs           
 0     0000b85d  Flash_initModule                 
-0     000854f5  GPIO_setDirectionMode            
-0     00084e33  GPIO_setPadConfig                
-0     000850bf  GPIO_setPinConfig                
-0     000854b1  GPIO_setQualificationMode        
-0     0008566f  GPIO_setQualificationPeriod      
-0     0008517c  HAL_MTR1_init                    
-0     00085901  HAL_MTR_setGateDriver            
-0     0008537b  HAL_MTR_setParams                
-0     00085af8  HAL_clearDataRAM                 
-0     00085977  HAL_enableCtrlInts               
-0     0008502b  HAL_enableDRV                    
-0     00085bee  HAL_enableDebugInt               
-0     00085bc0  HAL_enableGlobalInts             
-0     000851aa  HAL_init                         
-0     0008589d  HAL_setMtrCMPSSDACValue          
-0     0008548d  HAL_setParams                    
-0     00085515  HAL_setTriggerPrams              
-0     00084232  HAL_setupADCs                    
-0     00084699  HAL_setupCMPSSs                  
-0     0008568a  HAL_setupCPUUsageTimer           
+0     000854f3  GPIO_setDirectionMode            
+0     00084e31  GPIO_setPadConfig                
+0     000850bd  GPIO_setPinConfig                
+0     000854af  GPIO_setQualificationMode        
+0     0008566d  GPIO_setQualificationPeriod      
+0     0008517a  HAL_MTR1_init                    
+0     000858ff  HAL_MTR_setGateDriver            
+0     00085379  HAL_MTR_setParams                
+0     00085af6  HAL_clearDataRAM                 
+0     00085975  HAL_enableCtrlInts               
+0     00085029  HAL_enableDRV                    
+0     00085bec  HAL_enableDebugInt               
+0     00085bbe  HAL_enableGlobalInts             
+0     000851a8  HAL_init                         
+0     0008589b  HAL_setMtrCMPSSDACValue          
+0     0008548b  HAL_setParams                    
+0     00085513  HAL_setTriggerPrams              
+0     00084230  HAL_setupADCs                    
+0     00084697  HAL_setupCMPSSs                  
+0     00085688  HAL_setupCPUUsageTimer           
 0     00082b2d  HAL_setupGPIOs                   
-0     0008478c  HAL_setupI2CA                    
-0     00083f88  HAL_setupMtrFaults               
-0     00083ade  HAL_setupPWMs                    
-0     00084a76  HAL_setupSCIA                    
-0     000852d6  HAL_setupTimeBaseTimer           
-0     000858af  I2C_clearInterruptStatus         
-0     00085866  I2C_enableInterrupt              
-0     00084975  I2C_initController               
-0     00085bc4  INVERSE_init                     
-0     00085a02  INVERSE_setParams                
-0     00085bc8  IPARK_init                       
-0     0008599c  Interrupt_defaultHandler         
-0     00084f5a  Interrupt_enable                 
-0     000859d3  Interrupt_illegalOperationHandler
-0     00084db3  Interrupt_initModule             
-0     00085572  Interrupt_initVectorTable        
-0     000859dd  Interrupt_nmiHandler             
-0     00085bcc  PARK_init                        
-0     00085bd0  PI_init                          
+0     0008478a  HAL_setupI2CA                    
+0     00083f86  HAL_setupMtrFaults               
+0     00083adc  HAL_setupPWMs                    
+0     00084a74  HAL_setupSCIA                    
+0     000852d4  HAL_setupTimeBaseTimer           
+0     000858ad  I2C_clearInterruptStatus         
+0     00085864  I2C_enableInterrupt              
+0     00084973  I2C_initController               
+0     00085bc2  INVERSE_init                     
+0     00085a00  INVERSE_setParams                
+0     00085bc6  IPARK_init                       
+0     0008599a  Interrupt_defaultHandler         
+0     00084f58  Interrupt_enable                 
+0     000859d1  Interrupt_illegalOperationHandler
+0     00084db1  Interrupt_initModule             
+0     00085570  Interrupt_initVectorTable        
+0     000859db  Interrupt_nmiHandler             
+0     00085bca  PARK_init                        
+0     00085bce  PI_init                          
 abs   000820e4  RamfuncsLoadEnd                  
 abs   000010e4  RamfuncsLoadSize                 
 abs   00081000  RamfuncsLoadStart                
 abs   0000b8e4  RamfuncsRunEnd                   
 abs   000010e4  RamfuncsRunSize                  
 abs   0000a800  RamfuncsRunStart                 
-0     00085638  SCI_clearInterruptStatus         
-0     000851d7  SCI_setConfig                    
-0     00085553  SPI_clearInterruptStatus         
-0     00085441  SPI_setConfig                    
-0     00085bd4  SVGEN_init                       
+0     00085636  SCI_clearInterruptStatus         
+0     000851d5  SCI_setConfig                    
+0     00085551  SPI_clearInterruptStatus         
+0     0008543f  SPI_setConfig                    
+0     00085bd2  SVGEN_init                       
 0     0000b8de  SysCtl_delay                     
-0     00084082  SysCtl_isPLLValid                
-0     00085467  SysCtl_selectOscSource           
-0     00084d26  SysCtl_selectXTAL                
-0     000854d3  SysCtl_selectXTALSingleEnded     
-0     00083c3d  SysCtl_setClock                  
-0     00085bd8  TRAJ_init                        
+0     00084080  SysCtl_isPLLValid                
+0     00085465  SysCtl_selectOscSource           
+0     00084d24  SysCtl_selectXTAL                
+0     000854d1  SysCtl_selectXTALSingleEnded     
+0     00083c3b  SysCtl_setClock                  
+0     00085bd6  TRAJ_init                        
 0     0008331d  USER_setMotor1Params             
-0     00084715  USER_setParams_priv              
-0     00085b36  VS_FREQ_init                     
-0     00084ee9  VS_FREQ_setProfile               
+0     00084713  USER_setParams_priv              
+0     00085b34  VS_FREQ_init                     
+0     00084ee7  VS_FREQ_setProfile               
 0     00000300  VsFreq_M1                        
-0     00085202  XBAR_setEPWMMuxConfig            
+0     00085200  XBAR_setEPWMMuxConfig            
 0     0008e024  __TI_CINIT_Base                  
 0     0008e03c  __TI_CINIT_Limit                 
 0     0008e03c  __TI_CINIT_Warm                  
@@ -909,45 +909,45 @@ abs   0000a800  RamfuncsRunStart
 0     0008e010  __TI_Handler_Table_Limit         
 0     00000228  __TI_STACK_END                   
 abs   00000100  __TI_STACK_SIZE                  
-0     0008522d  __TI_auto_init_nobinit_nopinit   
+0     0008522b  __TI_auto_init_nobinit_nopinit   
 0     00000524  __TI_cleanup_ptr                 
-0     000850ef  __TI_decompress_lzss             
-0     00085a94  __TI_decompress_none             
+0     000850ed  __TI_decompress_lzss             
+0     00085a92  __TI_decompress_none             
 0     00000526  __TI_dtors_ptr                   
 0     00000522  __TI_enable_exit_profile_output  
 abs   ffffffff  __TI_pprof_out_hndl              
 abs   ffffffff  __TI_prof_data_size              
 abs   ffffffff  __TI_prof_data_start             
-0     00085b3c  __TI_zero_init                   
+0     00085b3a  __TI_zero_init                   
 n/a   UNDEFED   __c_args__                       
 0     00000128  __stack                          
-0     000859a8  _args_main                       
-0     0008573b  _c_int00                         
+0     000859a6  _args_main                       
+0     00085739  _c_int00                         
 0     00000528  _lock                            
-0     00085a13  _nop                             
-0     00085a0f  _register_lock                   
-0     00085a0b  _register_unlock                 
-0     00083f87  _system_post_cinit               
-0     00085bf1  _system_pre_init                 
+0     00085a11  _nop                             
+0     00085a0d  _register_lock                   
+0     00085a09  _register_unlock                 
+0     00083f85  _system_post_cinit               
+0     00085bef  _system_pre_init                 
 0     0000052a  _unlock                          
-0     000853a4  abort                            
+0     000853a2  abort                            
 0     0000029e  angleGen_M1                      
-0     0008511f  calcMotorOverCurrentThreshold    
-0     0008458d  calculateRMSData                 
-0     000858c0  canaISR                          
+0     0008511d  calcMotorOverCurrentThreshold    
+0     0008458b  calculateRMSData                 
+0     000858be  canaISR                          
 0     00000298  clarke_I_M1                      
 0     00000292  clarke_V_M1                      
 0     00080000  code_start                       
-0     00084a23  collectRMSData                   
+0     00084a21  collectRMSData                   
 0     00000658  dac128s                          
 0     00000642  dac128sHandle                    
 0     0000a000  est                              
-0     000853a6  exit                             
+0     000853a4  exit                             
 0     00000682  hal                              
 0     00000680  halHandle                        
 0     000002e0  halMtr_M1                        
 0     00082837  initMotor1CtrlParameters         
-0     000856a5  initMotor1Handles                
+0     000856a3  initMotor1Handles                
 0     00000282  ipark_V_M1                       
 0     0000c000  loadEnd_SFRA_F32_Data            
 0     0000a800  loadEnd_ctrlfuncs                
@@ -980,8 +980,8 @@ abs   00000000  loadSize_vibc_data
 0     00000540  loadStart_user_data              
 0     0000c000  loadStart_vibc_data              
 0     0008375b  main                             
-0     0008558f  memcpy                           
-0     00085aff  memset                           
+0     0008558d  memcpy                           
+0     00085afd  memset                           
 0     0000af2e  motor1CtrlISR                    
 0     00000280  motorHandle_M1                   
 0     00000340  motorSetVars_M1                  
@@ -991,23 +991,23 @@ abs   00000000  loadSize_vibc_data
 0     000002b0  pi_Id_M1                         
 0     000002c0  pi_Iq_M1                         
 0     000002d0  pi_spd_M1                        
-0     00084613  resetMotorControl                
-0     00084b17  restartMotorControl              
+0     00084611  resetMotorControl                
+0     00084b15  restartMotorControl              
 0     0000a800  runEnd_ctrlfuncs                 
 0     00082de7  runMotor1Control                 
 0     000824f0  runMotor1OffsetsCalculation      
 0     00083578  runMotorMonitor                  
-0     0008485f  runRsOnLine                      
+0     0008485d  runRsOnLine                      
 abs   00000000  runSize_ctrlfuncs                
 0     0000a800  runStart_ctrlfuncs               
-0     0008570a  setupClarke_I                    
-0     0008583f  setupClarke_V                    
-0     00083e7a  setupControllers                 
-0     00085911  stopMotorControl                 
+0     00085708  setupClarke_I                    
+0     0008583d  setupClarke_V                    
+0     00083e78  setupControllers                 
+0     0008590f  stopMotorControl                 
 0     0000028e  svgen_M1                         
 0     00000644  systemVars                       
 0     000002a6  traj_spd_M1                      
-0     0008415c  updateGlobalVariables            
+0     0008415a  updateGlobalVariables            
 0     00000540  userParams_M1                    
 
 
@@ -1092,239 +1092,239 @@ page  address   name
 0     0008331d  USER_setMotor1Params             
 0     00083578  runMotorMonitor                  
 0     0008375b  main                             
-0     00083920  EST_reset                        
-0     00083ade  HAL_setupPWMs                    
-0     00083c3d  SysCtl_setClock                  
-0     00083d6b  EST_Traj_configure               
-0     00083e7a  setupControllers                 
-0     00083f87  _system_post_cinit               
-0     00083f88  HAL_setupMtrFaults               
-0     00084082  SysCtl_isPLLValid                
-0     0008415c  updateGlobalVariables            
-0     00084232  HAL_setupADCs                    
-0     000842f8  EST_init                         
-0     000843bc  EST_Traj_setParams               
-0     00084467  Device_enableAllPeripherals      
-0     00084507  EST_Dir_setLpFilterParams        
-0     0008458d  calculateRMSData                 
-0     00084613  resetMotorControl                
-0     00084699  HAL_setupCMPSSs                  
-0     00084715  USER_setParams_priv              
-0     0008478c  HAL_setupI2CA                    
-0     0008485f  runRsOnLine                      
-0     000848c0  EST_Flux_setParams               
-0     0008491c  EST_Traj_updateState             
-0     00084975  I2C_initController               
-0     000849cd  DAC128S_writeData                
-0     00084a23  collectRMSData                   
-0     00084a76  HAL_setupSCIA                    
-0     00084ac8  DAC128S_setupSPI                 
-0     00084b17  restartMotorControl              
-0     00084b66  EST_Freq_setParams               
-0     00084bb4  EST_Dir_setHpFilterParams        
-0     00084bfe  EST_Flux_ab_setDerFilterParams   
-0     00084c48  EST_Iab_setLpFilterParams        
-0     00084c92  EST_Idq_setLpFilterParams        
-0     00084cdc  EST_Vdq_setLpFilterParams        
-0     00084d26  SysCtl_selectXTAL                
-0     00084d6e  EST_RsOnLine_setParams           
-0     00084db3  Interrupt_initModule             
-0     00084df4  EST_Ls_setParams                 
-0     00084e33  GPIO_setPadConfig                
-0     00084e72  EST_RsOnLine_setLpFilterParams   
-0     00084eaf  EST_Flux_updateState             
-0     00084ee9  VS_FREQ_setProfile               
-0     00084f23  Device_init                      
-0     00084f5a  Interrupt_enable                 
-0     00084f90  EST_Ls_updateState               
-0     00084fc5  EST_Rr_updateState               
-0     00084ff8  EST_Rs_updateState               
-0     0008502b  HAL_enableDRV                    
-0     0008505d  DAC128S_writeCommand             
-0     0008508e  EST_Dir_init                     
-0     000850bf  GPIO_setPinConfig                
-0     000850ef  __TI_decompress_lzss             
-0     0008511f  calcMotorOverCurrentThreshold    
-0     0008514e  EST_Iab_resetLpFilters           
-0     0008517c  HAL_MTR1_init                    
-0     000851aa  HAL_init                         
-0     000851d7  SCI_setConfig                    
-0     00085202  XBAR_setEPWMMuxConfig            
-0     0008522d  __TI_auto_init_nobinit_nopinit   
-0     00085258  EST_Freq_setDerFilterParams      
-0     00085282  EST_Freq_setLpFilterParams       
-0     000852ac  EST_Vdq_resetLpFilters           
-0     000852d6  HAL_setupTimeBaseTimer           
-0     00085300  EST_OneOverDcBus_setParams       
-0     00085329  EST_RsOnLine_init                
-0     00085352  EST_setFluxBeta_lp               
-0     0008537b  HAL_MTR_setParams                
-0     000853a4  C$$EXIT                          
-0     000853a4  abort                            
-0     000853a6  exit                             
-0     000853cd  EST_computeTorque_Nm             
-0     000853f5  EST_Angle_setParams              
-0     0008541b  EST_Idq_resetLpFilters           
-0     00085441  SPI_setConfig                    
-0     00085467  SysCtl_selectOscSource           
-0     0008548d  HAL_setParams                    
-0     000854b1  GPIO_setQualificationMode        
-0     000854d3  SysCtl_selectXTALSingleEnded     
-0     000854f5  GPIO_setDirectionMode            
-0     00085515  HAL_setTriggerPrams              
-0     00085535  EST_computeLmag_H                
-0     00085553  SPI_clearInterruptStatus         
-0     00085572  Interrupt_initVectorTable        
-0     0008558f  memcpy                           
-0     000855ac  EST_Dir_resetLpFilters           
-0     000855c8  EST_Rr_setParams                 
-0     000855e4  EST_Rs_setParams                 
-0     00085600  EST_Traj_init                    
-0     0008561c  EST_setFreqBetaOmega_der         
-0     00085638  SCI_clearInterruptStatus         
-0     00085654  EST_setFlux_ab_betaOmega_der     
-0     0008566f  GPIO_setQualificationPeriod      
-0     0008568a  HAL_setupCPUUsageTimer           
-0     000856a5  initMotor1Handles                
-0     000856bf  ADC_setVREF                      
-0     000856d8  CMPSS_configFilterHigh           
-0     000856f1  CMPSS_configFilterLow            
-0     0008570a  setupClarke_I                    
-0     00085723  EST_Traj_reset                   
-0     0008573b  _c_int00                         
-0     00085752  EST_Flux_ab_init                 
-0     00085768  EST_Freq_init                    
-0     0008577e  EST_Iab_init                     
-0     00085794  EST_Iab_setParams                
-0     000857aa  EST_Idq_init                     
-0     000857c0  EST_Vdq_init                     
-0     000857d6  ADC_setOffsetTrimAll             
-0     000857eb  EST_setFreqBeta_lp               
-0     00085800  EST_setIab_beta_lp               
-0     00085815  EST_setIdq_beta_lp               
-0     0008582a  EST_setVdq_beta_lp               
-0     0008583f  setupClarke_V                    
-0     00085853  EST_Idq_setParams                
-0     00085866  I2C_enableInterrupt              
-0     00085879  EST_Vdq_setParams                
-0     0008588b  EST_initEst                      
-0     0008589d  HAL_setMtrCMPSSDACValue          
-0     000858af  I2C_clearInterruptStatus         
-0     000858c0  canaISR                          
-0     000858d1  Device_initGPIO                  
-0     000858e1  EST_Dir_resetHpFilters           
-0     000858f1  EST_Flux_ab_resetDerFilters      
-0     00085901  HAL_MTR_setGateDriver            
-0     00085911  stopMotorControl                 
-0     00085921  EST_Flux_init                    
-0     00085930  EST_OneOverDcBus_init            
-0     0008593f  EST_setFreqLFP_sf                
-0     0008594e  EST_getFlux_Wb                   
-0     0008595c  EST_getFm_lp_Hz                  
-0     0008596a  ANGLE_GEN_setParams              
-0     00085977  HAL_enableCtrlInts               
-0     00085984  EST_setBemf_sf                   
-0     00085990  EST_setOneOverFluxGain_sf        
-0     0008599c  Interrupt_defaultHandler         
-0     000859a8  _args_main                       
-0     000859b4  EST_Dir_setParams                
-0     000859bf  DAC128S_init                     
-0     000859c9  EST_Flux_ab_setParams            
-0     000859d3  Interrupt_illegalOperationHandler
-0     000859dd  Interrupt_nmiHandler             
-0     000859e7  EPWM_setEmulationMode            
-0     000859f0  EST_computePower_W               
-0     000859f9  EST_setAngle_rad                 
-0     00085a02  INVERSE_setParams                
-0     00085a0b  _register_unlock                 
-0     00085a0f  _register_lock                   
-0     00085a13  _nop                             
-0     00085a14  EST_enableTraj                   
-0     00085a1c  EST_getLs_d_H                    
-0     00085a24  EST_getLs_q_H                    
-0     00085a2c  EST_getRr_Ohm                    
-0     00085a34  EST_getRsOnLine_Ohm              
-0     00085a3c  EST_getRs_Ohm                    
-0     00085a44  EST_isError                      
-0     00085a4c  EST_isIdle                       
-0     00085a54  EST_isLockRotor                  
-0     00085a5c  EST_setFlag_enablePowerWarp      
-0     00085a64  EST_setLs_d_H                    
-0     00085a6c  EST_setLs_q_H                    
-0     00085a74  EST_setRr_Ohm                    
-0     00085a7c  EST_setRsOnLineId_A              
-0     00085a84  EST_setRsOnLineId_mag_A          
-0     00085a8c  EST_setRsOnLine_Ohm              
-0     00085a94  __TI_decompress_none             
-0     00085aa4  EST_Eab_setParams                
-0     00085aab  EST_Flux_setWaitTimes            
-0     00085ab2  EST_Freq_resetDerFilter          
-0     00085ab9  EST_Freq_resetLpFilter           
-0     00085ac0  EST_Ls_setWaitTimes              
-0     00085ac7  EST_Rr_setWaitTimes              
-0     00085ace  EST_Rs_setWaitTimes              
-0     00085ad5  EST_configureTraj                
-0     00085adc  EST_disableTraj                  
-0     00085ae3  EST_setMotorParams               
-0     00085aea  EST_setWaitTimes                 
-0     00085af1  EST_updateTrajState              
-0     00085af8  HAL_clearDataRAM                 
-0     00085aff  memset                           
-0     00085b06  ANGLE_GEN_init                   
-0     00085b0c  CPUTimer_setEmulationMode        
-0     00085b12  EST_Traj_isError                 
-0     00085b18  EST_getFe_rps                    
-0     00085b1e  EST_isTrajError                  
-0     00085b24  EST_setId_ref_A                  
-0     00085b2a  EST_setIq_ref_A                  
-0     00085b30  FILTER_FO_setInitialConditions   
-0     00085b36  VS_FREQ_init                     
-0     00085b3c  __TI_zero_init                   
-0     00085b42  EST_Edq_setParams                
-0     00085b47  EST_Flux_dq_setParams            
-0     00085b4c  EST_Vab_setParams                
-0     00085b51  EST_enable                       
-0     00085b56  EST_getTrajState                 
-0     00085b5b  FILTER_FO_setNumCoeffs           
-0     00085b60  CLARKE_init                      
-0     00085b64  EST_Angle_init                   
-0     00085b68  EST_Eab_init                     
-0     00085b6c  EST_Edq_init                     
-0     00085b70  EST_Flux_dq_init                 
-0     00085b74  EST_Ls_init                      
-0     00085b78  EST_Rr_init                      
-0     00085b7c  EST_Rs_init                      
-0     00085b80  EST_Vab_init                     
-0     00085b84  EST_disable                      
-0     00085b88  EST_getFlag_bypassLockRotor      
-0     00085b8c  EST_getFlag_enable               
-0     00085b90  EST_getFlag_enableRsOnLine       
-0     00085b94  EST_getFlag_enableRsRecalc       
-0     00085b98  EST_getRoverL_rps                
-0     00085b9c  EST_isMotorIdentified            
-0     00085ba0  EST_setFlag_bypassLockRotor      
-0     00085ba4  EST_setFlag_enable               
-0     00085ba8  EST_setFlag_enableFluxControl    
-0     00085bac  EST_setFlag_enableForceAngle     
-0     00085bb0  EST_setFlag_enableRsOnLine       
-0     00085bb4  EST_setFlag_enableRsRecalc       
-0     00085bb8  EST_setFlag_updateRs             
-0     00085bbc  FILTER_FO_init                   
-0     00085bc0  HAL_enableGlobalInts             
-0     00085bc4  INVERSE_init                     
-0     00085bc8  IPARK_init                       
-0     00085bcc  PARK_init                        
-0     00085bd0  PI_init                          
-0     00085bd4  SVGEN_init                       
-0     00085bd8  TRAJ_init                        
-0     00085bdc  EST_checkForErrors               
-0     00085bdf  EST_getFASTVersion               
-0     00085be2  EST_resetCounter_isr             
-0     00085be5  EST_resetCounter_state           
-0     00085be8  EST_setNumIsrTicksPerEstTick     
-0     00085beb  FILTER_FO_setDenCoeffs           
-0     00085bee  HAL_enableDebugInt               
-0     00085bf1  _system_pre_init                 
+0     0008391e  EST_reset                        
+0     00083adc  HAL_setupPWMs                    
+0     00083c3b  SysCtl_setClock                  
+0     00083d69  EST_Traj_configure               
+0     00083e78  setupControllers                 
+0     00083f85  _system_post_cinit               
+0     00083f86  HAL_setupMtrFaults               
+0     00084080  SysCtl_isPLLValid                
+0     0008415a  updateGlobalVariables            
+0     00084230  HAL_setupADCs                    
+0     000842f6  EST_init                         
+0     000843ba  EST_Traj_setParams               
+0     00084465  Device_enableAllPeripherals      
+0     00084505  EST_Dir_setLpFilterParams        
+0     0008458b  calculateRMSData                 
+0     00084611  resetMotorControl                
+0     00084697  HAL_setupCMPSSs                  
+0     00084713  USER_setParams_priv              
+0     0008478a  HAL_setupI2CA                    
+0     0008485d  runRsOnLine                      
+0     000848be  EST_Flux_setParams               
+0     0008491a  EST_Traj_updateState             
+0     00084973  I2C_initController               
+0     000849cb  DAC128S_writeData                
+0     00084a21  collectRMSData                   
+0     00084a74  HAL_setupSCIA                    
+0     00084ac6  DAC128S_setupSPI                 
+0     00084b15  restartMotorControl              
+0     00084b64  EST_Freq_setParams               
+0     00084bb2  EST_Dir_setHpFilterParams        
+0     00084bfc  EST_Flux_ab_setDerFilterParams   
+0     00084c46  EST_Iab_setLpFilterParams        
+0     00084c90  EST_Idq_setLpFilterParams        
+0     00084cda  EST_Vdq_setLpFilterParams        
+0     00084d24  SysCtl_selectXTAL                
+0     00084d6c  EST_RsOnLine_setParams           
+0     00084db1  Interrupt_initModule             
+0     00084df2  EST_Ls_setParams                 
+0     00084e31  GPIO_setPadConfig                
+0     00084e70  EST_RsOnLine_setLpFilterParams   
+0     00084ead  EST_Flux_updateState             
+0     00084ee7  VS_FREQ_setProfile               
+0     00084f21  Device_init                      
+0     00084f58  Interrupt_enable                 
+0     00084f8e  EST_Ls_updateState               
+0     00084fc3  EST_Rr_updateState               
+0     00084ff6  EST_Rs_updateState               
+0     00085029  HAL_enableDRV                    
+0     0008505b  DAC128S_writeCommand             
+0     0008508c  EST_Dir_init                     
+0     000850bd  GPIO_setPinConfig                
+0     000850ed  __TI_decompress_lzss             
+0     0008511d  calcMotorOverCurrentThreshold    
+0     0008514c  EST_Iab_resetLpFilters           
+0     0008517a  HAL_MTR1_init                    
+0     000851a8  HAL_init                         
+0     000851d5  SCI_setConfig                    
+0     00085200  XBAR_setEPWMMuxConfig            
+0     0008522b  __TI_auto_init_nobinit_nopinit   
+0     00085256  EST_Freq_setDerFilterParams      
+0     00085280  EST_Freq_setLpFilterParams       
+0     000852aa  EST_Vdq_resetLpFilters           
+0     000852d4  HAL_setupTimeBaseTimer           
+0     000852fe  EST_OneOverDcBus_setParams       
+0     00085327  EST_RsOnLine_init                
+0     00085350  EST_setFluxBeta_lp               
+0     00085379  HAL_MTR_setParams                
+0     000853a2  C$$EXIT                          
+0     000853a2  abort                            
+0     000853a4  exit                             
+0     000853cb  EST_computeTorque_Nm             
+0     000853f3  EST_Angle_setParams              
+0     00085419  EST_Idq_resetLpFilters           
+0     0008543f  SPI_setConfig                    
+0     00085465  SysCtl_selectOscSource           
+0     0008548b  HAL_setParams                    
+0     000854af  GPIO_setQualificationMode        
+0     000854d1  SysCtl_selectXTALSingleEnded     
+0     000854f3  GPIO_setDirectionMode            
+0     00085513  HAL_setTriggerPrams              
+0     00085533  EST_computeLmag_H                
+0     00085551  SPI_clearInterruptStatus         
+0     00085570  Interrupt_initVectorTable        
+0     0008558d  memcpy                           
+0     000855aa  EST_Dir_resetLpFilters           
+0     000855c6  EST_Rr_setParams                 
+0     000855e2  EST_Rs_setParams                 
+0     000855fe  EST_Traj_init                    
+0     0008561a  EST_setFreqBetaOmega_der         
+0     00085636  SCI_clearInterruptStatus         
+0     00085652  EST_setFlux_ab_betaOmega_der     
+0     0008566d  GPIO_setQualificationPeriod      
+0     00085688  HAL_setupCPUUsageTimer           
+0     000856a3  initMotor1Handles                
+0     000856bd  ADC_setVREF                      
+0     000856d6  CMPSS_configFilterHigh           
+0     000856ef  CMPSS_configFilterLow            
+0     00085708  setupClarke_I                    
+0     00085721  EST_Traj_reset                   
+0     00085739  _c_int00                         
+0     00085750  EST_Flux_ab_init                 
+0     00085766  EST_Freq_init                    
+0     0008577c  EST_Iab_init                     
+0     00085792  EST_Iab_setParams                
+0     000857a8  EST_Idq_init                     
+0     000857be  EST_Vdq_init                     
+0     000857d4  ADC_setOffsetTrimAll             
+0     000857e9  EST_setFreqBeta_lp               
+0     000857fe  EST_setIab_beta_lp               
+0     00085813  EST_setIdq_beta_lp               
+0     00085828  EST_setVdq_beta_lp               
+0     0008583d  setupClarke_V                    
+0     00085851  EST_Idq_setParams                
+0     00085864  I2C_enableInterrupt              
+0     00085877  EST_Vdq_setParams                
+0     00085889  EST_initEst                      
+0     0008589b  HAL_setMtrCMPSSDACValue          
+0     000858ad  I2C_clearInterruptStatus         
+0     000858be  canaISR                          
+0     000858cf  Device_initGPIO                  
+0     000858df  EST_Dir_resetHpFilters           
+0     000858ef  EST_Flux_ab_resetDerFilters      
+0     000858ff  HAL_MTR_setGateDriver            
+0     0008590f  stopMotorControl                 
+0     0008591f  EST_Flux_init                    
+0     0008592e  EST_OneOverDcBus_init            
+0     0008593d  EST_setFreqLFP_sf                
+0     0008594c  EST_getFlux_Wb                   
+0     0008595a  EST_getFm_lp_Hz                  
+0     00085968  ANGLE_GEN_setParams              
+0     00085975  HAL_enableCtrlInts               
+0     00085982  EST_setBemf_sf                   
+0     0008598e  EST_setOneOverFluxGain_sf        
+0     0008599a  Interrupt_defaultHandler         
+0     000859a6  _args_main                       
+0     000859b2  EST_Dir_setParams                
+0     000859bd  DAC128S_init                     
+0     000859c7  EST_Flux_ab_setParams            
+0     000859d1  Interrupt_illegalOperationHandler
+0     000859db  Interrupt_nmiHandler             
+0     000859e5  EPWM_setEmulationMode            
+0     000859ee  EST_computePower_W               
+0     000859f7  EST_setAngle_rad                 
+0     00085a00  INVERSE_setParams                
+0     00085a09  _register_unlock                 
+0     00085a0d  _register_lock                   
+0     00085a11  _nop                             
+0     00085a12  EST_enableTraj                   
+0     00085a1a  EST_getLs_d_H                    
+0     00085a22  EST_getLs_q_H                    
+0     00085a2a  EST_getRr_Ohm                    
+0     00085a32  EST_getRsOnLine_Ohm              
+0     00085a3a  EST_getRs_Ohm                    
+0     00085a42  EST_isError                      
+0     00085a4a  EST_isIdle                       
+0     00085a52  EST_isLockRotor                  
+0     00085a5a  EST_setFlag_enablePowerWarp      
+0     00085a62  EST_setLs_d_H                    
+0     00085a6a  EST_setLs_q_H                    
+0     00085a72  EST_setRr_Ohm                    
+0     00085a7a  EST_setRsOnLineId_A              
+0     00085a82  EST_setRsOnLineId_mag_A          
+0     00085a8a  EST_setRsOnLine_Ohm              
+0     00085a92  __TI_decompress_none             
+0     00085aa2  EST_Eab_setParams                
+0     00085aa9  EST_Flux_setWaitTimes            
+0     00085ab0  EST_Freq_resetDerFilter          
+0     00085ab7  EST_Freq_resetLpFilter           
+0     00085abe  EST_Ls_setWaitTimes              
+0     00085ac5  EST_Rr_setWaitTimes              
+0     00085acc  EST_Rs_setWaitTimes              
+0     00085ad3  EST_configureTraj                
+0     00085ada  EST_disableTraj                  
+0     00085ae1  EST_setMotorParams               
+0     00085ae8  EST_setWaitTimes                 
+0     00085aef  EST_updateTrajState              
+0     00085af6  HAL_clearDataRAM                 
+0     00085afd  memset                           
+0     00085b04  ANGLE_GEN_init                   
+0     00085b0a  CPUTimer_setEmulationMode        
+0     00085b10  EST_Traj_isError                 
+0     00085b16  EST_getFe_rps                    
+0     00085b1c  EST_isTrajError                  
+0     00085b22  EST_setId_ref_A                  
+0     00085b28  EST_setIq_ref_A                  
+0     00085b2e  FILTER_FO_setInitialConditions   
+0     00085b34  VS_FREQ_init                     
+0     00085b3a  __TI_zero_init                   
+0     00085b40  EST_Edq_setParams                
+0     00085b45  EST_Flux_dq_setParams            
+0     00085b4a  EST_Vab_setParams                
+0     00085b4f  EST_enable                       
+0     00085b54  EST_getTrajState                 
+0     00085b59  FILTER_FO_setNumCoeffs           
+0     00085b5e  CLARKE_init                      
+0     00085b62  EST_Angle_init                   
+0     00085b66  EST_Eab_init                     
+0     00085b6a  EST_Edq_init                     
+0     00085b6e  EST_Flux_dq_init                 
+0     00085b72  EST_Ls_init                      
+0     00085b76  EST_Rr_init                      
+0     00085b7a  EST_Rs_init                      
+0     00085b7e  EST_Vab_init                     
+0     00085b82  EST_disable                      
+0     00085b86  EST_getFlag_bypassLockRotor      
+0     00085b8a  EST_getFlag_enable               
+0     00085b8e  EST_getFlag_enableRsOnLine       
+0     00085b92  EST_getFlag_enableRsRecalc       
+0     00085b96  EST_getRoverL_rps                
+0     00085b9a  EST_isMotorIdentified            
+0     00085b9e  EST_setFlag_bypassLockRotor      
+0     00085ba2  EST_setFlag_enable               
+0     00085ba6  EST_setFlag_enableFluxControl    
+0     00085baa  EST_setFlag_enableForceAngle     
+0     00085bae  EST_setFlag_enableRsOnLine       
+0     00085bb2  EST_setFlag_enableRsRecalc       
+0     00085bb6  EST_setFlag_updateRs             
+0     00085bba  FILTER_FO_init                   
+0     00085bbe  HAL_enableGlobalInts             
+0     00085bc2  INVERSE_init                     
+0     00085bc6  IPARK_init                       
+0     00085bca  PARK_init                        
+0     00085bce  PI_init                          
+0     00085bd2  SVGEN_init                       
+0     00085bd6  TRAJ_init                        
+0     00085bda  EST_checkForErrors               
+0     00085bdd  EST_getFASTVersion               
+0     00085be0  EST_resetCounter_isr             
+0     00085be3  EST_resetCounter_state           
+0     00085be6  EST_setNumIsrTicksPerEstTick     
+0     00085be9  FILTER_FO_setDenCoeffs           
+0     00085bec  HAL_enableDebugInt               
+0     00085bef  _system_pre_init                 
 0     0008e00a  __TI_Handler_Table_Base          
 0     0008e010  __TI_Handler_Table_Limit         
 0     0008e024  __TI_CINIT_Base                  

@@ -939,7 +939,11 @@ void runMotor1OffsetsCalculation(MOTOR_Handle handle)
     {
         float32_t offsetK1 = 0.998001f;  // Offset filter coefficient K1: 0.05/(T+0.05);
         float32_t offsetK2 = 0.001999f;  // Offset filter coefficient K2: T/(T+0.05);
-        float32_t invCurrentSf = 1.0f / obj->adcData.current_sf;// 47/4096
+        float32_t invCurrentSf = 1.0f / obj->adcData.current_sf;   //==4096/47
+
+        //来自 obj->adcData.current_sf = objUser->current_sf * USER_M1_SIGN_CURRENT_SF;
+        //来自 objUser->current_sf = USER_M1_CURRENT_SF;
+        //来自 USER_M1_CURRENT_SF          (USER_M1_ADC_FULL_SCALE_CURRENT_A / 4096.0f)   //47/4096
 
 #if defined(MOTOR1_FAST) || defined(MOTOR1_ISBLDC)
         float32_t invVdcbus;
@@ -983,7 +987,7 @@ void runMotor1OffsetsCalculation(MOTOR_Handle handle)
         ADC_setPPBReferenceOffset(MTR1_IU_ADC_BASE, MTR1_IU_ADC_PPB_NUM, 0);
         ADC_setPPBReferenceOffset(MTR1_IV_ADC_BASE, MTR1_IV_ADC_PPB_NUM, 0);
         ADC_setPPBReferenceOffset(MTR1_IW_ADC_BASE, MTR1_IW_ADC_PPB_NUM, 0);
-        //第二部，obj->adcData.offset_I_ad.value在926*928行进行过赋值，乘以adcData.current_sf，从AD值转化为浮点数
+        //第二部，obj->adcData.offset_I_ad.value在926，928行进行过赋值，乘以adcData.current_sf，从AD值转化为浮点数
         obj->adcData.offset_I_ad.value[0] =
                  obj->adcData.offset_I_ad.value[0] * obj->adcData.current_sf;
         obj->adcData.offset_I_ad.value[1] =
@@ -997,6 +1001,7 @@ void runMotor1OffsetsCalculation(MOTOR_Handle handle)
         obj->pwmData.Vabc_pu.value[2] = 0.0f;
 
         // write the PWM compare values
+        //第三步 配置PWM用于触发ADC，PWM比较值设置成0，这样不会有电流产生
         HAL_writePWMData(obj->halMtrHandle, &obj->pwmData);
 #endif // !(MOTOR1_ISBLDC || MOTOR1_DCLINKSS)
 
@@ -1025,6 +1030,8 @@ void runMotor1OffsetsCalculation(MOTOR_Handle handle)
                                                   obj->adcData.Idc2_A.value[0] +
                                                   obj->adcData.Idc2_A.value[1]);
 #else // !(MOTOR1_ISBLDC || MOTOR1_DCLINKSS)
+                //偏差 = offsetK1*偏差 + offsetK2*电流值，
+                //经过30000次迭代offset_I_ad（偏差）会逐渐上甚至23.5f附近
                 obj->adcData.offset_I_ad.value[0] =
                         offsetK1 * obj->adcData.offset_I_ad.value[0] +
                         obj->adcData.I_A.value[0] * offsetK2;

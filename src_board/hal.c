@@ -2165,9 +2165,9 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setDirectionMode(31, GPIO_DIR_MODE_IN);
     GPIO_setPadConfig(31, GPIO_PIN_TYPE_PULLUP);
 #else
-    // GPIO33->Reserve
+    // GPIO31->Reserve//为了使用LED现将该引脚配置为输出模式
     GPIO_setPinConfig(GPIO_31_GPIO31);
-    GPIO_setDirectionMode(31, GPIO_DIR_MODE_IN);
+    GPIO_setDirectionMode(31, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(31, GPIO_PIN_TYPE_STD);
 #endif  // DAC128S_ENABLE && DAC128S_SPIB
 
@@ -2202,9 +2202,9 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setPadConfig(33, GPIO_PIN_TYPE_STD);
 #endif  // DAC128S_ENABLE && DAC128S_SPIB
 
-    // GPIO34->M1_DRV_nFAULT*
+    // GPIO34->M1_DRV_nFAULT*//为了使用LED现将该引脚配置为输出模式
     GPIO_setPinConfig(GPIO_34_GPIO34);
-    GPIO_setDirectionMode(34, GPIO_DIR_MODE_IN);
+    GPIO_setDirectionMode(34, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(34, GPIO_PIN_TYPE_STD);
 
     // GPIO35

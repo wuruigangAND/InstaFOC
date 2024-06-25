@@ -1857,7 +1857,7 @@ extern uint32_t loadSize_SFRA_F32_Data;
 #define HAL_GPIO_ISR_M1     39      //!< GPIO pin number for ISR Executing Time
 // BSXL8323RS_REVA
 #elif defined(BSXL8323RH_REVB)
-#define HAL_GPIO_LED1C      31//34      //!< GPIO pin number for LaunchPad LED 1
+#define HAL_GPIO_LED1C      34//34      //!< GPIO pin number for LaunchPad LED 1
 #define HAL_GPIO_LED2C      34      //!< GPIO pin number for LaunchPad LED 2
 #define HAL_GPIO_LED1B      39      //!< GPIO pin number for BoostxlPak LED 1
 #define HAL_GPIO_LED2B      39      //!< GPIO pin number for BoostxlPak LED 2
