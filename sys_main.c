@@ -250,7 +250,7 @@ void main(void)
 
     // enable the ADC/PWM interrupts for control
     // enable interrupts to trig DMA
-    HAL_enableCtrlInts(halHandle);
+    HAL_enableCtrlInts(halHandle);//very important
 
     // set the control parameters for motor 1
 
@@ -485,11 +485,15 @@ void main(void)
     dac128s.offset[2] = (uint16_t)(0.5f * DAC_SCALE_SET);
     dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
 #elif defined(DAC_LEVEL_MOTOR1_FAST)
-    dac128s.ptrData[0] = &motorVars_M1.angleFOC_rad;                // CH_A
-    //dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;
+
+    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
     dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
     dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
     dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
+//    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
+//    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
+//    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
+//    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
 
     dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
     dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;

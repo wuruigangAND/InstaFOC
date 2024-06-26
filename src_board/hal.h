@@ -782,8 +782,8 @@ extern uint32_t loadSize_SFRA_F32_Data;
 
 
 // CMPSS
-#define MTR1_CMPSS_DACH_VALUE   (2048 + 1024 + 512)
-#define MTR1_CMPSS_DACL_VALUE   (2048 - 1024 - 512)
+#define MTR1_CMPSS_DACH_VALUE   (2048 + 1024 + 1024)//(2048 + 1024 + 512)//将比较器阈值开大
+#define MTR1_CMPSS_DACL_VALUE   (2048 - 1024 - 1024)//(2048 - 1024 - 512)
 
 //! \brief Defines the PWM deadband falling edge delay count (system clocks)
 #define MTR1_PWM_DBFED_CNT      5           // 50ns
