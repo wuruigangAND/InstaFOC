@@ -378,7 +378,8 @@ void initMotor1CtrlParameters(MOTOR_Handle handle)
 #if defined(MOTOR1_DCLINKSS)
         obj->svmMode = SVM_COM_C;
 #else  // !(MOTOR1_DCLINKSS)
-        obj->svmMode = SVM_MIN_C;
+        //obj->svmMode = SVM_MIN_C;
+        obj->svmMode = SVM_COM_C;//修改一下SVPWM调制方式
 #endif  // !(MOTOR1_DCLINKSS)
         obj->flagEnableFWC = true;
     }

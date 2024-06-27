@@ -1191,7 +1191,7 @@ extern "C"
 #define USER_MOTOR1_FREQ_MIN_Hz            (9.0f)           // Hz
 
 // the maximum/base rotation frequency of the motor (Hz)
-#define USER_MOTOR1_FREQ_MAX_Hz            (70.0f)         // Hz
+#define USER_MOTOR1_FREQ_MAX_Hz            (400.0f)         // Hz
 
 // V/f Profile Parameters for open-loop in build level 2
 // the low frequency f_low  of V/f profile, in Hz,
@@ -1200,11 +1200,11 @@ extern "C"
 
 // the high frequency f_high of V/f profile, in Hz,
 // set to 100% of rated motor frequency
-#define USER_MOTOR1_FREQ_HIGH_Hz           (30.0f)         // Hz
+#define USER_MOTOR1_FREQ_HIGH_Hz           (300.0f)         // Hz
 
 // the minimum voltage V_min  of V/f profile,
 // the value is suggested to set to 15% of rated motor voltage, in Volt.
-#define USER_MOTOR1_VOLT_MIN_V             (1.0f)           // Volt
+#define USER_MOTOR1_VOLT_MIN_V             (1.2f)           // Volt
 
 // the maximum voltage,  V_max of V/f profile,
 // the value is suggested to set to 100% of rated motor voltage, in Volt
@@ -1234,10 +1234,10 @@ extern "C"
 #define USER_MOTOR1_OVER_CURRENT_A         (7.5f)           // A
 
 // the speed threshold for start the motor, in Hz
-#define USER_MOTOR1_SPEED_START_Hz         (5.0f)          // Hz
+#define USER_MOTOR1_SPEED_START_Hz         (35.0f)          // Hz
 
 // the speed threshold for running the motor with force open-loop, in Hz
-#define USER_MOTOR1_SPEED_FORCE_Hz         (10.0f)          // Hz
+#define USER_MOTOR1_SPEED_FORCE_Hz         (30.0f)          // Hz
 
 // the acceleration for start the motor, in Hz/s.
 #define USER_MOTOR1_ACCEL_START_Hzps       (10.0f)          // Hz/s

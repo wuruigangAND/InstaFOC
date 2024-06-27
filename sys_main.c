@@ -486,19 +486,23 @@ void main(void)
     dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
 #elif defined(DAC_LEVEL_MOTOR1_FAST)
 
-    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
-    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
-    dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
-    dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
 //    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
-//    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
-//    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
-//    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
+//    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
+//    dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
+//    dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
+    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
+    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
+    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
+    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
 
+//    dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
+//    dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+//    dac128s.gain[2] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+//    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
     dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
-    dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-    dac128s.gain[2] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+    dac128s.gain[1] = 2048;
+    dac128s.gain[2] = 2048;
+    dac128s.gain[3] = 2048;
 
     dac128s.offset[0] = (uint16_t)(0.5f * DAC_SCALE_SET);
     dac128s.offset[1] = (uint16_t)(0.5f * DAC_SCALE_SET);
@@ -668,6 +672,13 @@ void main(void)
 
     motorVars_M1.flagEnableOffsetCalc = true;
 
+    //添加一段调试代码
+    GPIO_setDirectionMode(37, GPIO_DIR_MODE_IN);
+    GPIO_setPadConfig(37, GPIO_PIN_TYPE_PULLUP);
+    GPIO_setPinConfig(GPIO_37_GPIO37);
+    GPIO_setDirectionMode(44, GPIO_DIR_MODE_IN);
+    GPIO_setPadConfig(44, GPIO_PIN_TYPE_PULLUP);
+    GPIO_setPinConfig(GPIO_44_GPIO44);
     // run offset calibration for motor 1
     runMotor1OffsetsCalculation(motorHandle_M1);
 
@@ -708,6 +719,19 @@ void main(void)
 
     while(systemVars.flagEnableSystem == true)
     {
+//        if((GPIO_readPin(37) == 0) && (motorVars_M1.faultMtrNow.all = 0)){
+//            motorVars_M1.flagEnableRunAndIdentify = 1;
+//        }
+//        else if ((GPIO_readPin(37) != 0) && (motorVars_M1.faultMtrNow.all != 0)){
+//            motorVars_M1.flagEnableRunAndIdentify = 0;
+//        }
+//
+//        if(GPIO_readPin(44) == 0){
+//            motorVars_M1.faultMtrNow.all = 0 ;
+//        }
+//        else{
+//            motorVars_M1.faultMtrNow.all = 0 ;
+//        }
         // loop while the enable system flag is true
         systemVars.mainLoopCnt++;
 
