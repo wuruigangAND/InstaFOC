@@ -782,8 +782,8 @@ extern uint32_t loadSize_SFRA_F32_Data;
 
 
 // CMPSS
-#define MTR1_CMPSS_DACH_VALUE   (2048 + 1024 + 1024)//(2048 + 1024 + 512)//将比较器阈值开大
-#define MTR1_CMPSS_DACL_VALUE   (2048 - 1024 - 1024)//(2048 - 1024 - 512)
+#define MTR1_CMPSS_DACH_VALUE   (2048 + 1024 + 512)//(2048 + 1024 + 512)//将比较器阈值开大
+#define MTR1_CMPSS_DACL_VALUE   (2048 - 1024 - 512)//(2048 - 1024 - 512)
 
 //! \brief Defines the PWM deadband falling edge delay count (system clocks)
 #define MTR1_PWM_DBFED_CNT      5           // 50ns
@@ -1005,6 +1005,8 @@ extern uint32_t loadSize_SFRA_F32_Data;
 #define MTR1_ADC_INT_BASE       ADCC_BASE               // ADCC-C6  -SOC6
 #define MTR1_ADC_INT_NUM        ADC_INT_NUMBER1         // ADCC_INT1-SOC6
 #define MTR1_ADC_INT_SOC        ADC_SOC_NUMBER6         // ADCC_INT1-SOC6
+//the reason that why ADC_SOC_NUMBER6 was choosed for ADCC_INT is SOC6 which was used for VDC is the
+//last SOC module in the rank of ADC convert.--WRG signed
 
 #define MTR1_PIE_INT_NUM        INT_ADCC1               // ADCC_INT1-SOC6
 #define MTR1_CPU_INT_NUM        INTERRUPT_CPU_INT1      // ADCC_INT1-CPU_INT1

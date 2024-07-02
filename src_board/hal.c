@@ -358,7 +358,8 @@ void HAL_MTR_setParams(HAL_MTR_Handle handle, USER_Params *pUserParams)
     HAL_setupPWMs(handle);
 
     // setup the CMPSSs
-    HAL_setupCMPSSs(handle);
+    //HAL_setupCMPSSs(handle);
+    //注释此句，仅保留fault错误过流保护
 
 #if defined(MOTOR1_ENC)
     // setup the EQEP
@@ -366,7 +367,7 @@ void HAL_MTR_setParams(HAL_MTR_Handle handle, USER_Params *pUserParams)
 #endif  // MOTOR1_ENC
 
     // setup faults
-    HAL_setupMtrFaults(handle);//6.13ע�ʹ˴�
+    HAL_setupMtrFaults(handle);//6.13注锟酵此达拷
 
 #if defined(MOTOR1_HALL) || defined(CMD_CAP_EN)
     // setup the CAPs
@@ -2004,7 +2005,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     // GPIO10->SPIA_SOMI->DAC128S_SDO*
    GPIO_setPinConfig(GPIO_10_SPIA_SOMI);
    GPIO_setDirectionMode(10, GPIO_DIR_MODE_IN);
-   GPIO_setPadConfig(10, GPIO_PIN_TYPE_PULLUP);//����������Ʋ��ԣ���Ҫ��SDO������ĹܽŶ̽�����
+   GPIO_setPadConfig(10, GPIO_PIN_TYPE_PULLUP);//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷撇锟斤拷裕锟斤拷锟揭拷锟絊DO锟斤拷锟斤拷锟斤拷墓芙哦探锟斤拷锟斤拷锟�
 #endif
 
     // GPIO11->Reserve GPIO
@@ -2144,7 +2145,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setPinConfig(GPIO_23_GPIO23);
     GPIO_writePin(23, 1);
     GPIO_setDirectionMode(23, GPIO_DIR_MODE_OUT);
-    GPIO_setPadConfig(23, GPIO_PIN_TYPE_STD);//�޸�ʹ������ΪGPIO23
+    GPIO_setPadConfig(23, GPIO_PIN_TYPE_STD);//锟睫革拷使锟斤拷锟斤拷锟斤拷为GPIO23
 #endif
 
 #if defined(DAC128S_ENABLE) && defined(DAC128S_SPIB)
@@ -2165,7 +2166,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setDirectionMode(31, GPIO_DIR_MODE_IN);
     GPIO_setPadConfig(31, GPIO_PIN_TYPE_PULLUP);
 #else
-    // GPIO31->Reserve//Ϊ��ʹ��LED�ֽ�����������Ϊ���ģʽ
+    // GPIO31->Reserve//为锟斤拷使锟斤拷LED锟街斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷为锟斤拷锟侥Ｊ�
     GPIO_setPinConfig(GPIO_31_GPIO31);
     GPIO_setDirectionMode(31, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(31, GPIO_PIN_TYPE_STD);
@@ -2202,7 +2203,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setPadConfig(33, GPIO_PIN_TYPE_STD);
 #endif  // DAC128S_ENABLE && DAC128S_SPIB
 
-    // GPIO34->M1_DRV_nFAULT*//Ϊ��ʹ��LED�ֽ�����������Ϊ���ģʽ
+    // GPIO34->M1_DRV_nFAULT*//为锟斤拷使锟斤拷LED锟街斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷为锟斤拷锟侥Ｊ�
     GPIO_setPinConfig(GPIO_34_GPIO34);
     GPIO_setDirectionMode(34, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(34, GPIO_PIN_TYPE_STD);
@@ -3533,6 +3534,7 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
 #else   //!(MOTOR1_ISBLDC || MOTOR1_DCLINKSS)
     // setup the Event Trigger Selection Register (ETSEL)
     EPWM_setInterruptSource(obj->pwmHandle[0], EPWM_INT_TBCTR_ZERO);
+    //although  line 3535 initial epwm_init ,no isr function was registered,  so useless
 
     EPWM_enableInterrupt(obj->pwmHandle[0]);
 
@@ -3584,7 +3586,7 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
 
     // write the PWM data value  for ADC trigger
     EPWM_setCounterCompareValue(obj->pwmHandle[0], EPWM_COUNTER_COMPARE_C, 10);
-
+    //at the time which TBCTR is 10,the down bridge is open!! -- by WRG
     // write the PWM data value  for ADC trigger
 #if defined(MOTOR1_DCLINKSS)
     EPWM_clearADCTriggerFlag(obj->pwmHandle[1], EPWM_SOC_A);

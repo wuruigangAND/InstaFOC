@@ -2,13 +2,6 @@ Flash_lib_DRV8323RH_2SC_1SC/
 Flash_lib_DRV8329A_1SC/
 Flash_lib_DRV8323RS_3SC/
 Flash_lib_DRV8323RH_3SC/
-.launches/
-.settings/
 
-/.ccsproject
-/.cproject
-/.project
-/TMS320F280025C.ccxml
-/TMS320F280025C_LaunchPad.ccxml
 
 

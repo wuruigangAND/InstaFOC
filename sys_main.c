@@ -263,7 +263,7 @@ void main(void)
     motorVars_M1.speedRef_rpm = 600.0f;     // rpm
 
     // false - enables identification, true - disables identification
-    userParams_M1.flag_bypassMotorId = true;  //    false;   //
+    userParams_M1.flag_bypassMotorId = true;//true;  //    false;   //
 
     initMotor1Handles(motorHandle_M1);
     initMotor1CtrlParameters(motorHandle_M1);
