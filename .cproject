@@ -1301,8 +1301,8 @@
 									<listOptionValue builtIn="false" value="MOTOR1_VOLRECT_N"/>
 									<listOptionValue builtIn="false" value="DATALOGF2_EN_N"/>
 									<listOptionValue builtIn="false" value="DAC128S_ENABLE"/>
-									<listOptionValue builtIn="false" value="DAC128S_SPIB_N"/>
-									<listOptionValue builtIn="false" value="DAC128S_SPIA"/>
+									<listOptionValue builtIn="false" value="DAC128S_SPIB"/>
+									<listOptionValue builtIn="false" value="DAC128S_SPIA_N"/>
 									<listOptionValue builtIn="false" value="CPUTIME_ENABLE_N"/>
 									<listOptionValue builtIn="false" value="TEST_ENABLE_N"/>
 									<listOptionValue builtIn="false" value="SFRA_ENABLE_N"/>

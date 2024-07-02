@@ -366,7 +366,7 @@ void HAL_MTR_setParams(HAL_MTR_Handle handle, USER_Params *pUserParams)
 #endif  // MOTOR1_ENC
 
     // setup faults
-    HAL_setupMtrFaults(handle);//6.13×¢ÊÍ´Ë´¦
+    HAL_setupMtrFaults(handle);//6.13×¢ï¿½Í´Ë´ï¿½
 
 #if defined(MOTOR1_HALL) || defined(CMD_CAP_EN)
     // setup the CAPs
@@ -2004,7 +2004,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     // GPIO10->SPIA_SOMI->DAC128S_SDO*
    GPIO_setPinConfig(GPIO_10_SPIA_SOMI);
    GPIO_setDirectionMode(10, GPIO_DIR_MODE_IN);
-   GPIO_setPadConfig(10, GPIO_PIN_TYPE_PULLUP);//°å×ÓÕâÀïÉè¼Æ²»¶Ô£¬ÐèÒª°ÑSDOºÍÉÏÃæµÄ¹Ü½Å¶Ì½ÓÆðÀ´
+   GPIO_setPadConfig(10, GPIO_PIN_TYPE_PULLUP);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½Ô£ï¿½ï¿½ï¿½Òªï¿½ï¿½SDOï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹Ü½Å¶Ì½ï¿½ï¿½ï¿½ï¿½ï¿½
 #endif
 
     // GPIO11->Reserve GPIO
@@ -2144,7 +2144,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setPinConfig(GPIO_23_GPIO23);
     GPIO_writePin(23, 1);
     GPIO_setDirectionMode(23, GPIO_DIR_MODE_OUT);
-    GPIO_setPadConfig(23, GPIO_PIN_TYPE_STD);//ÐÞ¸ÄÊ¹ÄÜÒý½ÅÎªGPIO23
+    GPIO_setPadConfig(23, GPIO_PIN_TYPE_STD);//ï¿½Þ¸ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªGPIO23
 #endif
 
 #if defined(DAC128S_ENABLE) && defined(DAC128S_SPIB)
@@ -2165,7 +2165,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setDirectionMode(31, GPIO_DIR_MODE_IN);
     GPIO_setPadConfig(31, GPIO_PIN_TYPE_PULLUP);
 #else
-    // GPIO31->Reserve//ÎªÁËÊ¹ÓÃLEDÏÖ½«¸ÃÒý½ÅÅäÖÃÎªÊä³öÄ£Ê½
+    // GPIO31->Reserve//Îªï¿½ï¿½Ê¹ï¿½ï¿½LEDï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ä£Ê½
     GPIO_setPinConfig(GPIO_31_GPIO31);
     GPIO_setDirectionMode(31, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(31, GPIO_PIN_TYPE_STD);
@@ -2202,7 +2202,7 @@ void HAL_setupGPIOs(HAL_Handle handle)
     GPIO_setPadConfig(33, GPIO_PIN_TYPE_STD);
 #endif  // DAC128S_ENABLE && DAC128S_SPIB
 
-    // GPIO34->M1_DRV_nFAULT*//ÎªÁËÊ¹ÓÃLEDÏÖ½«¸ÃÒý½ÅÅäÖÃÎªÊä³öÄ£Ê½
+    // GPIO34->M1_DRV_nFAULT*//Îªï¿½ï¿½Ê¹ï¿½ï¿½LEDï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ä£Ê½
     GPIO_setPinConfig(GPIO_34_GPIO34);
     GPIO_setDirectionMode(34, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(34, GPIO_PIN_TYPE_STD);
@@ -3297,6 +3297,8 @@ void HAL_setupGPIOs(HAL_Handle handle)
     return;
 }  // end of HAL_setupGPIOs() function
 
+/// @brief 
+/// @param handle 
 void HAL_setupPWMs(HAL_MTR_Handle handle)
 {
     HAL_MTR_Obj    *obj = (HAL_MTR_Obj *)handle;
@@ -3576,7 +3578,7 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
 
     // since the PWM is configured as an up/down counter, the period register is
     // set to one-half of the desired PWM period
-    EPWM_setTimeBasePeriod(obj->pwmHandle[0], pwmPeriodCycles);
+    EPWM_setTimeBasePeriod(obj->pwmHandle[0], pwmPeriodCycles);//pwmPeriodCycles = 100*1000/15/2 = 3333.33
     EPWM_setTimeBasePeriod(obj->pwmHandle[1], pwmPeriodCycles);
     EPWM_setTimeBasePeriod(obj->pwmHandle[2], pwmPeriodCycles);
 

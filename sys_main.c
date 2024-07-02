@@ -486,23 +486,23 @@ void main(void)
     dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
 #elif defined(DAC_LEVEL_MOTOR1_FAST)
 
-//    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
-//    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
-//    dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
-//    dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
     dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
-    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
-    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
-    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
+    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
+    dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
+    dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
+//    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
+//    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
+//    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
+//    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
 
-//    dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
-//    dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-//    dac128s.gain[2] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-//    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
     dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
-    dac128s.gain[1] = 2048;
-    dac128s.gain[2] = 2048;
-    dac128s.gain[3] = 2048;
+    dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+    dac128s.gain[2] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+//    dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
+//    dac128s.gain[1] = 2048;
+//    dac128s.gain[2] = 2048;
+//    dac128s.gain[3] = 2048;
 
     dac128s.offset[0] = (uint16_t)(0.5f * DAC_SCALE_SET);
     dac128s.offset[1] = (uint16_t)(0.5f * DAC_SCALE_SET);

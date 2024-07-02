@@ -14,5 +14,5 @@
 	<sourceLookupPath value="${C2000WARE_DLIB_ROOT}"/>
 	<origin value="D:\ti\c2000\C2000Ware_MotorControl_SDK_5_02_00_00\solutions\universal_motorcontrol_lab\f28002x\ccs\motor_control\universal_motorcontrol_lab.projectspec"/>
 	<filesToOpen value=""/>
-	<isTargetManual value="false"/>
+	<isTargetManual value="true"/>
 </projectOptions>
