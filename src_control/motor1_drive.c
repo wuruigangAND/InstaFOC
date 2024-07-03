@@ -4181,10 +4181,6 @@ __interrupt void motor1CtrlISR(void)
     {
         obj->Vdq_ffwd_V.value[0] = 0.0f;
         obj->Vdq_ffwd_V.value[1] = 0.0f;
-
-
-
-
         // Maximum voltage output
         obj->VsMax_V = objUser->maxVsMag_pu * obj->adcData.VdcBus_V;
         PI_setMinMax(obj->piHandle_Id, -obj->VsMax_V, obj->VsMax_V);
@@ -4206,7 +4202,7 @@ __interrupt void motor1CtrlISR(void)
                obj->Idq_in_A.value[1], (float32_t*)&obj->Vdq_out_V.value[1]);
 
 #else     // !SFRA_ENABLE
-        // run the Id controller
+        // run the Id controller,这里前向反馈输入0，因为看作没有
         PI_run_series(obj->piHandle_Id,
                       obj->IdqRef_A.value[0], obj->Idq_in_A.value[0],
                       obj->Vdq_ffwd_V.value[0], (float32_t*)&obj->Vdq_out_V.value[0]);

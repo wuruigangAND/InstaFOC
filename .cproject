@@ -1283,14 +1283,15 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE.1556077710" name="Provide advice on optimization techniques (--advice:performance)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE" value="--advice:performance=all" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.2056751928" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${COM_TI_MOTOR_CONTROL_C2000WARE_SDK_SOFTWARE_PACKAGE_SYMBOLS}"/>
+									<listOptionValue builtIn="false" value="MOTOR1_RPM_CMD"/>
 									<listOptionValue builtIn="false" value="_INLINE"/>
 									<listOptionValue builtIn="false" value="_FLASH"/>
 									<listOptionValue builtIn="false" value="_F28002x"/>
 									<listOptionValue builtIn="false" value="_FULL_FAST_LIB"/>
 									<listOptionValue builtIn="false" value="BSXL8323RH_REVB"/>
 									<listOptionValue builtIn="false" value="USER_MY_DRV8323RH"/>
-									<listOptionValue builtIn="false" value="MOTOR1_FAST"/>
-									<listOptionValue builtIn="false" value="MOTOR1_ESMO_N"/>
+									<listOptionValue builtIn="false" value="MOTOR1_FAST_N"/>
+									<listOptionValue builtIn="false" value="MOTOR1_ESMO"/>
 									<listOptionValue builtIn="false" value="MOTOR1_ENC_N"/>
 									<listOptionValue builtIn="false" value="MOTOR1_HALL_N"/>
 									<listOptionValue builtIn="false" value="HALL_CAL_N"/>

@@ -240,10 +240,10 @@ void main(void)
     Interrupt_initVectorTable();    // call the function in driverlib.lib
 
     // initialize the driver
-    halHandle = HAL_init(&hal, sizeof(hal));//halHandle 句柄初始化
+    halHandle = HAL_init(&hal, sizeof(hal));//halHandle
 
     // set the driver parameters
-    HAL_setParams(halHandle);//halHandle初始化参数写入寄存器
+    HAL_setParams(halHandle);//halHandle
 
     // initialize the interrupt vector table
     HAL_initIntVectorTable(halHandle);
@@ -486,11 +486,21 @@ void main(void)
     dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
 #elif defined(DAC_LEVEL_MOTOR1_FAST)
 
-    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
+//    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
+//    dac128s.ptrData[1] = &motorVars_M1.angleEST_rad;//经过补偿之后的
+//    dac128s.ptrData[2] = &motorVars_M1.estOutputData.angle_rad;//观测器初始角度
+//    dac128s.ptrData[3] = &motorVars_M1.angleFOC_rad;
+//
+//    dac128s.ptrData[4] = &motorVars_M1.trajHandle_spd->targetValue;
+//    dac128s.ptrData[5] = &motorVars_M1.trajHandle_spd->intValue;
+//    dac128s.ptrData[6] = &motorVars_M1.estInputData.speed_ref_Hz;
+//    dac128s.ptrData[7] = &motorVars_M1.speed_int_Hz;
+
+    dac128s.ptrData[0] = &motorVars_M1.anglePLL_rad;                // CH_A
     dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
     dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
     dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
-//    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
+
 //    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
 //    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
 //    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
@@ -499,10 +509,7 @@ void main(void)
     dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
     dac128s.gain[2] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
     dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-//    dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
-//    dac128s.gain[1] = 2048;
-//    dac128s.gain[2] = 2048;
-//    dac128s.gain[3] = 2048;
+
 
     dac128s.offset[0] = (uint16_t)(0.5f * DAC_SCALE_SET);
     dac128s.offset[1] = (uint16_t)(0.5f * DAC_SCALE_SET);
@@ -672,7 +679,7 @@ void main(void)
 
     motorVars_M1.flagEnableOffsetCalc = true;
 
-    //添加一段调试代码
+    //
     GPIO_setDirectionMode(37, GPIO_DIR_MODE_IN);
     GPIO_setPadConfig(37, GPIO_PIN_TYPE_PULLUP);
     GPIO_setPinConfig(GPIO_37_GPIO37);
@@ -742,7 +749,7 @@ void main(void)
 
             // toggle status LED on controller board
             systemVars.counterLEDC++;
-            //这里的LED和SPAB的引脚冲突了，在初始化设置中这个引脚被设置成了输入模式
+            //閿熸枻鎷烽敓鏂ゆ嫹閿熺祪ED閿熸枻鎷稴PAB閿熸枻鎷烽敓鏂ゆ嫹閿熻剼绛规嫹绐侀敓鍓匡綇鎷烽敓鑺傜鎷峰閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷风枱閿熸枻鎷烽敓鏂ゆ嫹璐搁敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熶茎锛拷
             if(systemVars.counterLEDC > (uint16_t)(LED_BLINK_FREQ_Hz * 1000))
             {
                 HAL_toggleGPIO(halHandle, HAL_GPIO_LED1C);     // Toggle on the LED
