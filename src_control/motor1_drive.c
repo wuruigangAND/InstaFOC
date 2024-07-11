@@ -45,7 +45,7 @@
 #include "sys_settings.h"
 #include "sys_main.h"
 #include "motor1_drive.h"
-
+#include "vofa_datascope.h"
 #pragma CODE_SECTION(motor1CtrlISR, ".TI.ramfunc");
 #pragma INTERRUPT(motor1CtrlISR, {HP});
 
@@ -496,12 +496,12 @@ void initMotor1CtrlParameters(MOTOR_Handle handle)
                                    HAL_getTimeBasePeriod(obj->halMtrHandle), 0.5f);
 
     //disable full sampling
-//    DCLINK_SS_setFlag_enableFullSampling(obj->dclinkHandle, false);     // default
-    DCLINK_SS_setFlag_enableFullSampling(obj->dclinkHandle, true);    // test, not recommend in most cases
+    DCLINK_SS_setFlag_enableFullSampling(obj->dclinkHandle, false);     // default
+//    DCLINK_SS_setFlag_enableFullSampling(obj->dclinkHandle, true);    // test, not recommend in most cases
 
     //enable sequence control
-//    DCLINK_SS_setFlag_enableSequenceControl(obj->dclinkHandle, false);  // default
-    DCLINK_SS_setFlag_enableSequenceControl(obj->dclinkHandle, true); // test, not recommend in most cases
+    DCLINK_SS_setFlag_enableSequenceControl(obj->dclinkHandle, false);  // default
+ //   DCLINK_SS_setFlag_enableSequenceControl(obj->dclinkHandle, true); // test, not recommend in most cases
 
     // Tdt  =  55 ns (Dead-time between top and bottom switch)
     // Tpd  = 140 ns (Gate driver propagation delay)
@@ -3299,7 +3299,7 @@ __interrupt void motor1CtrlISR(void)
     {
         obj->angleFOC_rad = obj->angleGen_rad;
         obj->enableSpeedCtrl = false;
-
+        //启动，令d轴电流为0，根据方向设置q轴电流等于startCurrent_A
         obj->Idq_out_A.value[0] = 0.0f;
 
         if(obj->speed_int_Hz > 0.0f)
@@ -3323,7 +3323,7 @@ __interrupt void motor1CtrlISR(void)
                 obj->stateRunTimeCnt = 0;
 
                 ESMO_setAnglePu(obj->esmoHandle, obj->angleFOC_rad);
-
+                //设置速度PI的积分初始值
                 PI_setUi(obj->piHandle_spd, (obj->frswPos_sf * obj->Idq_out_A.value[1]));
             }
         }
@@ -3968,7 +3968,7 @@ __interrupt void motor1CtrlISR(void)
 
     // run the speed controller
     obj->counterSpeed++;
-
+    // the num of numCtrlTicksPerSpeedTick is 10,so the frequency of speedPID is fpwm/10
     if(obj->counterSpeed >= objUser->numCtrlTicksPerSpeedTick)
     {
         obj->counterSpeed = 0;
@@ -4284,12 +4284,17 @@ __interrupt void motor1CtrlISR(void)
 
 #if defined(MOTOR1_DCLINKSS)
     // write the PWM compare values
-    HAL_writePWMData(obj->halMtrHandle, &obj->pwmData);
+    //根据影寄存器的设置，只有当TBCTR等于0时候，新的比较值才会载入
+   HAL_writePWMData(obj->halMtrHandle, &obj->pwmData);
 
     // revise PWM compare(CMPA/B) values for shifting switching pattern
     // and, update SOC trigger point
+   //1.该函数会为了获得采样窗口对PWM进行偏移，然后对EPWM123，进行重新赋值，虽然EPWM赋值操作在HAL_writePWMData
+   //进行过一次但是不影响，再次赋值。因为只有当TBCTR=0，才会更新进去
+   //2.设置CMPC、CMPD确定ADC触发窗口。
     HAL_runSingleShuntCompensation(obj->halMtrHandle, obj->dclinkHandle,
                          &obj->Vab_out_V, &obj->pwmData, obj->adcData.VdcBus_V);
+
 #else   // !(MOTOR1_DCLINKSS)
 #if defined(MOTOR1_OVM)
     else
@@ -4373,7 +4378,10 @@ __interrupt void motor1CtrlISR(void)
 #endif   // !(BSXL8323RS_REVA | BSXL8353RS_REVA | BSXL8316RT_REVA)
 #elif defined(_F28002x) || defined(_F28003x)
     // Write the variables data value to DAC128S085
-    DAC128S_writeData(dac128sHandle);
+    //DAC128S_writeData(dac128sHandle);
+
+    data_scope.data_state = data_ready;
+
 #endif  // !(F280013x | F280015x | F28002x | F28003x)
 #endif  // DAC128S_ENABLE
 

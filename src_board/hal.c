@@ -42,7 +42,7 @@
 // the includes
 //
 #include "user.h"
-
+#include "user_debug.h"
 
 //
 // drivers
@@ -535,6 +535,7 @@ void HAL_setupADCs(HAL_Handle handle)
 #else   // !(MOTOR1_DCLINKSS)
     // configure the interrupt sources
     // Interrupt for motor 1
+    //由于ADCC的SOC6是最后一个完成触发的，所以将设置在这里
     ADC_setInterruptSource(MTR1_ADC_INT_BASE,
                            MTR1_ADC_INT_NUM, MTR1_ADC_INT_SOC);
     // ISEN_A_M1
@@ -3405,8 +3406,8 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
         EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
                                       EPWM_AQ_OUTPUT_A,
                                       EPWM_AQ_OUTPUT_LOW,
-                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);//因为需要生成不对成PWM，因此此处设置有差异
+                                      //EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
         EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
                                       EPWM_AQ_OUTPUT_A,
                                       EPWM_AQ_OUTPUT_LOW,
@@ -3470,7 +3471,11 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
         // setup the Trip Zone Select Register (TZSEL)
         EPWM_disableTripZoneSignals(obj->pwmHandle[cnt], HAL_TZSEL_SIGNALS_ALL);
     }
+#if defined(DRV8329A_DEBUG)
+    //gpio12  gpio6
+    dclink_debug_init();
 
+#endif
     // BSXL8323RS_REVA || BSXL8323RH_REVB || BSXL8353RS_REVA || \
     // BSXL8316RT_REVA || BSXL3PHGAN_REVA || HVMTRPFC_REV1P1 || \
     // DRV8329AEVM_REVA
@@ -3607,7 +3612,7 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
 
 #endif  //MOTOR1_DCLINKSS
 
-
+    //dclink_debug_init();
     return;
 }  // end of HAL_setupPWMs() function
 

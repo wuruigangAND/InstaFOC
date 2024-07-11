@@ -48,6 +48,8 @@
 #include "user.h"
 #include "sys_settings.h"
 #include "sys_main.h"
+#include "user_debug.h"
+#include "vofa_datascope.h"
 
 
 volatile SYSTEM_Vars_t systemVars;
@@ -80,7 +82,6 @@ DAC128S_Obj      dac128s;              //!< the DAC128S interface object
 
 #define DAC_SCALE_SET       (4096.0f)     // 12bit
 #endif  // DAC128S_ENABLE
-
 
 
 #if defined(SFRA_ENABLE)
@@ -269,8 +270,22 @@ void main(void)
     initMotor1CtrlParameters(motorHandle_M1);
 
     // setup the GPIOs
+#if !defined(DRV8329A_DEBUG)
     HAL_setupGPIOs(halHandle);
+#endif
+#if defined(DRV8329A_DEBUG)
+    //dclink_debug_init();
+    uart_init(2500000);
+    user_io();
+    Data_Scope_Init();
+    data_scope.ptrData[0] = &motorVars_M1.angleGen_rad;
+    data_scope.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];
+    data_scope.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];
+    data_scope.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];
+    data_scope.ptrData[4] = &motorVars_M1.sector;
+    //data_scope.ptrData[4] = &((float32_t)(motorVars_M1.dclinkHandle->flag_SST * 10.0f));
 
+#endif
     // set up gate driver after completed GPIO configuration
     motorVars_M1.faultMtrNow.bit.gateDriver =
             HAL_MTR_setGateDriver(motorHandle_M1->halMtrHandle);
@@ -486,9 +501,15 @@ void main(void)
     dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
 #elif defined(DAC_LEVEL_MOTOR1_FAST)
 
+    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;
+    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];
+    dac128s.ptrData[2] = &motorVars_M1.sector;
+    dac128s.ptrData[3] = (float*)(motorVars_M1.dclinkHandle->sector_1);
+
 //    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
-//    dac128s.ptrData[1] = &motorVars_M1.angleEST_rad;//��������֮���
-//    dac128s.ptrData[2] = &motorVars_M1.estOutputData.angle_rad;//�۲�����ʼ�Ƕ�
+//  //  dac128s.ptrData[1] = &motorVars_M1.angleEST_rad;//��������֮���
+//    dac128s.ptrData[1] = &motorVars_M1.anglePLL_rad;
+//    dac128s.ptrData[2] = &motorVars_M1.;//�۲�����ʼ�Ƕ�
 //    dac128s.ptrData[3] = &motorVars_M1.angleFOC_rad;
 //
 //    dac128s.ptrData[4] = &motorVars_M1.trajHandle_spd->targetValue;
@@ -496,25 +517,30 @@ void main(void)
 //    dac128s.ptrData[6] = &motorVars_M1.estInputData.speed_ref_Hz;
 //    dac128s.ptrData[7] = &motorVars_M1.speed_int_Hz;
 
-    dac128s.ptrData[0] = &motorVars_M1.anglePLL_rad;                // CH_A
-    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
-    dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
-    dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
+//    dac128s.ptrData[0] = &motorVars_M1.anglePLL_rad;                // CH_A
+//    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];        // CH_B
+//    dac128s.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];        // CH_C
+//    dac128s.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];        // CH_D
 
 //    dac128s.ptrData[1] = &motorVars_M1.pwmData.Vabc_pu.value[0];        // CH_B
 //    dac128s.ptrData[2] = &motorVars_M1.pwmData.Vabc_pu.value[1];        // CH_C
 //    dac128s.ptrData[3] = &motorVars_M1.pwmData.Vabc_pu.value[2];        // CH_D
 
     dac128s.gain[0] = DAC_SCALE_SET / MATH_TWO_PI;
+//    dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_VOLTAGE_V;
+//    dac128s.gain[2] =  2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_VOLTAGE_V;
+//    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_VOLTAGE_V;
     dac128s.gain[1] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-    dac128s.gain[2] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
-    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
+    dac128s.gain[2] = DAC_SCALE_SET/6.0f;
+    dac128s.gain[3] = DAC_SCALE_SET/6.0f;
+//    dac128s.gain[3] = 2.0f * DAC_SCALE_SET / USER_M1_ADC_FULL_SCALE_CURRENT_A;
 
 
     dac128s.offset[0] = (uint16_t)(0.5f * DAC_SCALE_SET);
     dac128s.offset[1] = (uint16_t)(0.5f * DAC_SCALE_SET);
-    dac128s.offset[2] = (uint16_t)(0.5f * DAC_SCALE_SET);
-    dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
+//    dac128s.offset[2] = (uint16_t)(0.5f * DAC_SCALE_SET);
+    dac128s.offset[2] = 0.0f;
+    dac128s.offset[3] = 0.0f;
 #elif defined(DAC_LEVEL4_FAST_ESMO)
     dac128s.ptrData[0] = &motorVars_M1.angleEST_rad;                // CH_B
     dac128s.ptrData[1] = &motorVars_M1.anglePLL_rad;                // CH_B
@@ -680,12 +706,8 @@ void main(void)
     motorVars_M1.flagEnableOffsetCalc = true;
 
     //
-    GPIO_setDirectionMode(37, GPIO_DIR_MODE_IN);
-    GPIO_setPadConfig(37, GPIO_PIN_TYPE_PULLUP);
-    GPIO_setPinConfig(GPIO_37_GPIO37);
-    GPIO_setDirectionMode(44, GPIO_DIR_MODE_IN);
-    GPIO_setPadConfig(44, GPIO_PIN_TYPE_PULLUP);
-    GPIO_setPinConfig(GPIO_44_GPIO44);
+
+
     // run offset calibration for motor 1
     runMotor1OffsetsCalculation(motorHandle_M1);
 
@@ -726,6 +748,14 @@ void main(void)
 
     while(systemVars.flagEnableSystem == true)
     {
+
+        if(data_scope.data_state == data_ready){
+            GPIO_writePin(37,0);
+            data_scope.ScopeDataDealAndSend();
+            data_scope.data_state = data_empty;
+            GPIO_writePin(37,1);
+        }
+
 //        if((GPIO_readPin(37) == 0) && (motorVars_M1.faultMtrNow.all = 0)){
 //            motorVars_M1.flagEnableRunAndIdentify = 1;
 //        }
@@ -749,7 +779,6 @@ void main(void)
 
             // toggle status LED on controller board
             systemVars.counterLEDC++;
-            //锟斤拷锟斤拷锟絃ED锟斤拷SPAB锟斤拷锟斤拷锟脚筹拷突锟剿ｏ拷锟节筹拷始锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷疟锟斤拷锟斤拷贸锟斤拷锟斤拷锟斤拷锟侥Ｊ�
             if(systemVars.counterLEDC > (uint16_t)(LED_BLINK_FREQ_Hz * 1000))
             {
                 HAL_toggleGPIO(halHandle, HAL_GPIO_LED1C);     // Toggle on the LED

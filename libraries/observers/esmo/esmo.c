@@ -210,6 +210,7 @@ void ESMO_updatePLLParams(ESMO_Handle handle)
 //! \param[in] fbackValue  The feedback value to the controller
 //! \param[in] pOutValue   The pointer to the controller output value
 //static inline void ESMO_run(ESMO_Handle handle, _iq *pAngleValue, _iq *pSpeedValue)
+//位置计算方式包括反正切和锁相环，头文件里面那个仅仅只包括锁相环
 void ESMO_full_run(ESMO_Handle handle,
               float32_t Vdcbus, MATH_vec3 *pVabc_pu, MATH_vec2 *pIabVec)
 {

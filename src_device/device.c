@@ -103,6 +103,8 @@ void Device_init(void)
     SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_4);      // 120MHz/2=30MHz
 #elif (DEVICE_LSPCLK_FREQ == (DEVICE_SYSCLK_FREQ / 2))
     SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_2);      // 120MHz/2=60MHz
+#elif (DEVICE_LSPCLK_FREQ == (DEVICE_SYSCLK_FREQ))
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_1);
 #else
 #error "select a right LSPCLK divider, change the divider at here and header file "
 #endif

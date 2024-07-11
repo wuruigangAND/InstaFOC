@@ -215,6 +215,7 @@ extern uint32_t loadSize_SFRA_F32_Data;
 #define MTR1_PWM_V_BASE         EPWM2_BASE
 #define MTR1_PWM_W_BASE         EPWM3_BASE
 
+#ifndef USER_MY_DRV8329A
 //! \brief Defines the gpio for enabling Power Module
 #define MTR1_GATE_EN_GPIO       23      // DRV_OFF
 
@@ -223,6 +224,17 @@ extern uint32_t loadSize_SFRA_F32_Data;
 
 //! \brief Defines the gpio for enter/exit sleep mode
 #define MTR1_GATE_nSLEEP_GPIO   29      // SLEEP_DFLT
+#else
+//! \brief Defines the gpio for enabling Power Module
+#define MTR1_GATE_EN_GPIO       23      // DRV_OFF
+
+//! \brief Defines the gpio for the nFAULT of Power Module
+#define MTR1_PM_nFAULT_GPIO     28      // nFAULT_DFLT
+
+//! \brief Defines the gpio for enter/exit sleep mode
+#define MTR1_GATE_nSLEEP_GPIO   23      // SLEEP_DFLT
+#endif
+
 
 //! \brief Defines the QEP for encoder
 #define MTR1_QEP_BASE           EQEP1_BASE
@@ -312,10 +324,10 @@ extern uint32_t loadSize_SFRA_F32_Data;
 #define MTR1_IDC3_ADCRES_BASE   ADCCRESULT_BASE         // ADCC-A11/C0*
 #define MTR1_IDC4_ADCRES_BASE   ADCCRESULT_BASE         // ADCC-A11/C0*
 
-#define MTR1_IDC1_ADC_CH_NUM    ADC_CH_ADCIN0           // ADCC-A11/C0*
-#define MTR1_IDC2_ADC_CH_NUM    ADC_CH_ADCIN0           // ADCC-A11/C0*
-#define MTR1_IDC3_ADC_CH_NUM    ADC_CH_ADCIN0           // ADCC-A11/C0*
-#define MTR1_IDC4_ADC_CH_NUM    ADC_CH_ADCIN0           // ADCC-A11/C0*
+#define MTR1_IDC1_ADC_CH_NUM    ADC_CH_ADCIN1           // ADCC-A11/C0*//Ô­°æÊÇADC_CH_ADCIN0
+#define MTR1_IDC2_ADC_CH_NUM    ADC_CH_ADCIN1          // ADCC-A11/C0*
+#define MTR1_IDC3_ADC_CH_NUM    ADC_CH_ADCIN1           // ADCC-A11/C0*
+#define MTR1_IDC4_ADC_CH_NUM    ADC_CH_ADCIN1           // ADCC-A11/C0*
 
 #define MTR1_IDC1_ADC_SOC_NUM   ADC_SOC_NUMBER0         // ADCC-A11/C0* -SOC0-PPB1
 #define MTR1_IDC2_ADC_SOC_NUM   ADC_SOC_NUMBER1         // ADCC-A11/C0* -SOC1-PPB2
@@ -338,7 +350,7 @@ extern uint32_t loadSize_SFRA_F32_Data;
 
 
 //! \brief Defines the minimum duration, Clock Cycle
-#define USER_M1_DCLINKSS_MIN_DURATION   (225U)      //
+#define USER_M1_DCLINKSS_MIN_DURATION   (500U)//(225U)      //
 
 //! \brief Defines the sample delay, Clock Cycle
 #define USER_M1_DCLINKSS_SAMPLE_DELAY   (200U)      //
@@ -3166,7 +3178,20 @@ HAL_runSingleShuntCompensation(HAL_MTR_Handle handle,
     EPWM_setCounterCompareValue(obj->pwmHandle[2],
                                 EPWM_COUNTER_COMPARE_D,
                                 downSoc.value[1]);
-
+#if defined(DRV8329A_DEBUG)
+   EPWM_setCounterCompareValue(EPWM7_BASE,
+                                        EPWM_COUNTER_COMPARE_A,
+                                        upSoc.value[0]);
+   EPWM_setCounterCompareValue(EPWM7_BASE,
+                                        EPWM_COUNTER_COMPARE_B,
+                                        downSoc.value[0]);
+   EPWM_setCounterCompareValue(EPWM4_BASE,
+                                        EPWM_COUNTER_COMPARE_A,
+                                        upSoc.value[1]);
+   EPWM_setCounterCompareValue(EPWM4_BASE,
+                                          EPWM_COUNTER_COMPARE_B,
+                                        downSoc.value[1]);
+#endif
 
     return;
 } // end of HAL_singleShuntCompensation() function

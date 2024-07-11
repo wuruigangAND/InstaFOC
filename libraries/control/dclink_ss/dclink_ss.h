@@ -215,6 +215,8 @@ DCLINK_SS_runCurrentReconstruction(DCLINK_SS_Handle handle,
     }
     else    // false
     {
+        //flag_SST_1 = 0,表示先补后测，等于1表示先测后补
+        //如果是先补后测那么数值取TBCTR下降阶段的ADC，如果是先测量后补充，则数值去TBCTR上升阶段ADC数值
         if(obj->flag_SST_1 == 0)        // measurement vector is on down count
         {
             Idc.value[0] = pIdc2->value[0];
@@ -321,12 +323,14 @@ DCLINK_SS_runPWMCompensation(DCLINK_SS_Handle handle,
     float32_t Vb = -Va_tmp + Vb_tmp;
     float32_t Vc = -Va_tmp - Vb_tmp;
 
+    //首先从输入αβ轴电压归一化值使用clarke反变换，输出abc轴电压
+    //然后根据abc的正负情况判断扇区位置
     if (Va > 0.0f) sector = 1;
     if (Vb > 0.0f) sector = sector + 2;
     if (Vc > 0.0f) sector = sector + 4;
 
-    obj->sector_1 = obj->sector;
-    obj->sector = sector;
+    obj->sector_1 = obj->sector;//sector_1是上一个PWM周期的扇区
+    obj->sector = sector;//当前PWM扇区
 
     //
     // get EPWMx CMPA values
@@ -429,6 +433,13 @@ DCLINK_SS_runPWMCompensation(DCLINK_SS_Handle handle,
     {
         // first half = compensation vector, second half = measurement vector
         obj->flag_SST = 0;
+    }
+
+    if(obj->flag_SST == 0){
+        GPIO_writePin(44,0);
+    }
+    else{
+        GPIO_writePin(44,1);
     }
 
     //

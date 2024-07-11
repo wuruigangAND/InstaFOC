@@ -92,7 +92,7 @@ typedef struct _HAL_ADCData_t_
     float32_t current_sf;       //!< the current scale factor, amps/cnt
     float32_t voltage_sf;       //!< the phase voltage scale factor, volts/cnt
     float32_t dcBusvoltage_sf;  //!< the phase voltage scale factor, volts/cnt
-#ifdef USER_MY_DRV8323RH
+#ifdef USE_MY_DRV8323RH_DCLINK
     MATH_Vec2 Idc1_A;           //!< the dc-link current up values
     MATH_Vec2 Idc2_A;           //!< the dc-link current down values
     float32_t offset_Idc_ad;    //!< the motor current offset value

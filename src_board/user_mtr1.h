@@ -204,6 +204,8 @@ extern "C"
 #elif defined(DRV8329AEVM_REVA)       // LaunchPad-F280025
 //! \brief Defines the nominal DC bus voltage, V
 //!
+#ifndef USER_MY_DRV8329A
+
 #define USER_M1_NOMINAL_DC_BUS_VOLTAGE_V         (48.0f)
 
 //! \brief Defines the maximum voltage at the AD converter
@@ -250,6 +252,7 @@ extern "C"
 #error This inverter board only supports single shunt!
 #endif  // !MOTOR1_DCLINKSS  | !MOTOR1_ISBLDC
 
+
 //! \brief ADC voltage offsets for A, B, and C phases
 #define USER_M1_VA_OFFSET_SF    (0.507042527f)
 #define USER_M1_VB_OFFSET_SF    (0.505379438f)
@@ -291,6 +294,100 @@ extern "C"
 //! \brief Defines the number of failed torque
 //!
 #define USER_M1_TORQUE_FAILED_SET           (0.000001f)
+#else
+
+#define USER_M1_NOMINAL_DC_BUS_VOLTAGE_V         (48.0f)
+
+//! \brief Defines the maximum voltage at the AD converter
+#define USER_M1_ADC_FULL_SCALE_VOLTAGE_V         (57.52845691f)     // 110k/4.99k
+
+//! \brief Defines the analog voltage filter pole location, Hz
+#define USER_M1_VOLTAGE_FILTER_POLE_Hz           (680.6255675f)     // 110k/4.99k/100nF
+
+//! \brief Defines the maximum current at the AD converter
+//! Set the gain of the CSA, the value should be set accordingly.
+//! CSAGAIN=5V/V(J2=GND), CSAGAIN=10V/V(J2=50K), CSAGAIN=20V/V(J2=200K), CSAGAIN=40V/V(J2=DNP)
+//#define USER_M1_ADC_FULL_SCALE_CURRENT_A       (82.5f)            // Rs=0.001/gain=40/J2=DNP
+//#define USER_M1_ADC_FULL_SCALE_CURRENT_A       (66.0f)            // Rs=0.0025/gain=20/J2=200K
+#define USER_M1_ADC_FULL_SCALE_CURRENT_A       (47.14285714f)              // Rs=0.050/gain=40/J2=200K
+//#define USER_M1_ADC_FULL_SCALE_CURRENT_A         (16.5f)          // Rs=0.050/gain=40/J2=DNP
+
+// Single shunt
+#if defined(MOTOR1_DCLINKSS) || defined(MOTOR1_ISBLDC)
+//! \brief Defines the sign of the current_sf based on
+//!        the polarity of the current feedback circuit
+//!
+//!        the "sign" = -1.0f if the current feedback polarity is positive that
+//!        means the same pin of the shunt resistor is connected to ground and
+//!        is also connected to the noninverting pin (+) of the operational amplifier
+//!
+//!        the "sign" = 1.0f if the current feedback polarity is negative that
+//!        means the same pin of the shunt resistor is connected to ground and
+//!        is also connected to the inverting pin (-) of the operational amplifier
+#define USER_M1_SIGN_CURRENT_SF         (1.0f)
+
+//! \brief ADC current offsets for dc-link
+// the dc-link offset current for DRV8329AEVM_REVA
+#define USER_M1_IDC_OFFSET_A            (USER_M1_ADC_FULL_SCALE_CURRENT_A / 2.0f)
+
+//! \brief ADC current offsets for dc-link
+#define USER_M1_IDC_OFFSET_AD          (2048.0f)  //(516.717f)       //~=4096.0/8.0
+
+//! \brief ADC current offset for CMPSS
+#define USER_M1_IDC_OFFSET_CMPSS        (uint16_t)(USER_M1_IDC_OFFSET_AD)
+
+#define USER_M1_IDC_OFFSET_AD_MAX       (USER_M1_IDC_OFFSET_AD + 100.0f)
+#define USER_M1_IDC_OFFSET_AD_MIN       (USER_M1_IDC_OFFSET_AD - 100.0f)
+#else //!MOTOR1_DCLINKSS  | !MOTOR1_ISBLDC
+#error This inverter board only supports single shunt!
+#endif  // !MOTOR1_DCLINKSS  | !MOTOR1_ISBLDC
+
+
+//! \brief ADC voltage offsets for A, B, and C phases
+#define USER_M1_VA_OFFSET_SF    (0.507042527f)
+#define USER_M1_VB_OFFSET_SF    (0.505379438f)
+#define USER_M1_VC_OFFSET_SF    (0.50771445f)
+
+//! \brief DC bus over voltage threshold
+#define USER_M1_OVER_VOLTAGE_FAULT_V        (54.5f)
+
+//! \brief DC bus over voltage threshold
+#define USER_M1_OVER_VOLTAGE_NORM_V         (52.5f)
+
+//! \brief DC bus under voltage threshold
+#define USER_M1_UNDER_VOLTAGE_FAULT_V       (8.0f)
+
+//! \brief DC bus under voltage threshold
+#define USER_M1_UNDER_VOLTAGE_NORM_V        (10.0f)
+
+//! \brief motor lost phase current threshold
+#define USER_M1_LOST_PHASE_CURRENT_A        (0.01f)
+
+//! \brief motor unbalance ratio percent threshold
+#define USER_M1_UNBALANCE_RATIO             (0.2f)
+
+//! \brief motor over load power threshold
+#define USER_M1_OVER_LOAD_POWER_W           (90.0f)
+
+//! \brief motor stall current threshold
+#define USER_M1_STALL_CURRENT_A             (10.0f)
+
+//! \brief motor fault check current threshold
+#define USER_M1_FAULT_CHECK_CURRENT_A       (0.2f)
+
+//! \brief motor failed maximum speed threshold
+#define USER_M1_FAIL_SPEED_MAX_HZ           (1800.0f)
+
+//! \brief motor failed minimum speed threshold
+#define USER_M1_FAIL_SPEED_MIN_HZ           (5.0f)
+
+//! \brief Defines the number of failed torque
+//!
+#define USER_M1_TORQUE_FAILED_SET           (0.000001f)
+
+#endif
+
+
 
 // end of DRV8329AEVM_REVA
 //------------------------------------------------------------------------------
