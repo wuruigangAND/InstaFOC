@@ -273,7 +273,7 @@ void main(void)
 #if !defined(DRV8329A_DEBUG)
     HAL_setupGPIOs(halHandle);
 #endif
-#if defined(DRV8329A_DEBUG)
+#if defined(DRV8329A_DEBUG)||defined(USE_UART_Debug)
     //dclink_debug_init();
     uart_init(2500000);
     user_io();
@@ -282,7 +282,11 @@ void main(void)
     data_scope.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];
     data_scope.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];
     data_scope.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];
-    data_scope.ptrData[4] = &motorVars_M1.sector;
+//    data_scope.ptrData[4] = &motorVars_M1.adcData.double_shunt_I_A.value[0];
+//    data_scope.ptrData[5] = &motorVars_M1.adcData.double_shunt_I_A.value[1];
+//    data_scope.ptrData[6] = &motorVars_M1.adcData.double_shunt_I_A.value[2];
+//    data_scope.ptrData[7] = &motorVars_M1.sector;
+    //data_scope.ptrData[4] = &motorVars_M1.sector;
     //data_scope.ptrData[4] = &((float32_t)(motorVars_M1.dclinkHandle->flag_SST * 10.0f));
 
 #endif
@@ -501,10 +505,10 @@ void main(void)
     dac128s.offset[3] = (uint16_t)(0.5f * DAC_SCALE_SET);
 #elif defined(DAC_LEVEL_MOTOR1_FAST)
 
-    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;
-    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];
-    dac128s.ptrData[2] = &motorVars_M1.sector;
-    dac128s.ptrData[3] = (float*)(motorVars_M1.dclinkHandle->sector_1);
+//    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;
+//    dac128s.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];
+//    dac128s.ptrData[2] = &motorVars_M1.sector;
+//    dac128s.ptrData[3] = (float*)(motorVars_M1.dclinkHandle->sector_1);
 
 //    dac128s.ptrData[0] = &motorVars_M1.angleGen_rad;                // CH_A
 //  //  dac128s.ptrData[1] = &motorVars_M1.angleEST_rad;//经过补偿之后的

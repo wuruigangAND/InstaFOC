@@ -109,7 +109,9 @@ extern "C"
 #endif  // MOTOR1_ESMO
 
 
-
+#if defined(USE_MY_DRV8323RH_DCLINK)
+#include "dclink_ss.h"
+#endif
 
 
 #if defined(MOTOR1_DCLINKSS)
@@ -978,6 +980,13 @@ typedef struct _MOTOR_Vars_t_
     DCLINK_SS_Handle dclinkHandle;
     float32_t sector;
 #endif  // MOTOR1_DCLINKSS
+
+#if defined(USE_MY_DRV8323RH_DCLINK)
+    //!< the handle for single-shunt current reconstruction
+    DCLINK_SS_Handle dclinkHandle;
+    //MATH_Vec3 reconstruction_current;
+    float32_t sector;
+#endif
 
 #if defined(MOTOR1_VOLRECT)
     //!< the handle for the voltage reconstruct

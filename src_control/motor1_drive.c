@@ -218,6 +218,9 @@ MTPA_Obj     mtpa_M1;
 DCLINK_SS_Obj    dclink_M1;
 
 #pragma DATA_SECTION(dclink_M1, "foc_data");
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+DCLINK_SS_Obj    dclink_M1;
+#pragma DATA_SECTION(dclink_M1, "foc_data")
 #endif // MOTOR1_DCLINKSS
 
 #if defined(MOTOR1_VOLRECT)
@@ -490,6 +493,31 @@ void initMotor1CtrlParameters(MOTOR_Handle handle)
 
 
 #if defined(MOTOR1_DCLINKSS)
+    obj->dclinkHandle = DCLINK_SS_init(&dclink_M1, sizeof(dclink_M1));
+
+    DCLINK_SS_setInitialConditions(obj->dclinkHandle,
+                                   HAL_getTimeBasePeriod(obj->halMtrHandle), 0.5f);
+
+    //disable full sampling
+    DCLINK_SS_setFlag_enableFullSampling(obj->dclinkHandle, false);     // default
+//    DCLINK_SS_setFlag_enableFullSampling(obj->dclinkHandle, true);    // test, not recommend in most cases
+
+    //enable sequence control
+    DCLINK_SS_setFlag_enableSequenceControl(obj->dclinkHandle, false);  // default
+ //   DCLINK_SS_setFlag_enableSequenceControl(obj->dclinkHandle, true); // test, not recommend in most cases
+
+    // Tdt  =  55 ns (Dead-time between top and bottom switch)
+    // Tpd  = 140 ns (Gate driver propagation delay)
+    // Tr   = 136 ns (Rise time of amplifier including power switches turn on time)
+    // Ts   = 800 ns (Settling time of amplifier)
+    // Ts&h = 100 ns (ADC sample&holder = 1+(9)+2 = 12 SYSCLK)
+    // T_MinAVDuration = Tdt+Tr+Tpd+Ts+Ts&h
+    //                 = 55+140+136+800+100 = 1231(ns) => 148 SYSCLK cycles
+    // T_SampleDelay   = Tdt+Tpd+Tr+Ts
+    //                 = 55+140+136+800     = 1131(ns) => 136 SYSCLK cycles
+    DCLINK_SS_setMinAVDuration(obj->dclinkHandle, USER_M1_DCLINKSS_MIN_DURATION);
+    DCLINK_SS_setSampleDelay(obj->dclinkHandle, USER_M1_DCLINKSS_SAMPLE_DELAY);
+#elif defined(USE_MY_DRV8323RH_DCLINK)
     obj->dclinkHandle = DCLINK_SS_init(&dclink_M1, sizeof(dclink_M1));
 
     DCLINK_SS_setInitialConditions(obj->dclinkHandle,
@@ -1033,9 +1061,22 @@ void runMotor1OffsetsCalculation(MOTOR_Handle handle)
 #else // !(MOTOR1_ISBLDC || MOTOR1_DCLINKSS)
                 //偏差 = offsetK1*偏差 + offsetK2*电流值，
                 //经过30000次迭代offset_I_ad（偏差）会逐渐上甚至23.5f附近
+#if defined(USE_MY_DRV8323RH_DCLINK)
                 obj->adcData.offset_I_ad.value[0] =
                         offsetK1 * obj->adcData.offset_I_ad.value[0] +
-                        obj->adcData.I_A.value[0] * offsetK2;
+                        obj->adcData.double_shunt_I_A.value[0] * offsetK2;
+
+                obj->adcData.offset_I_ad.value[1] =
+                        offsetK1 * obj->adcData.offset_I_ad.value[1] +
+                        obj->adcData.double_shunt_I_A.value[1] * offsetK2;
+
+                obj->adcData.offset_I_ad.value[2] =
+                        offsetK1 * obj->adcData.offset_I_ad.value[2] +
+                        obj->adcData.double_shunt_I_A.value[2] * offsetK2;
+#else
+                obj->adcData.offset_I_ad.value[0] =
+                                        offsetK1 * obj->adcData.offset_I_ad.value[0] +
+                                        obj->adcData.I_A.value[0] * offsetK2;
 
                 obj->adcData.offset_I_ad.value[1] =
                         offsetK1 * obj->adcData.offset_I_ad.value[1] +
@@ -1044,6 +1085,8 @@ void runMotor1OffsetsCalculation(MOTOR_Handle handle)
                 obj->adcData.offset_I_ad.value[2] =
                         offsetK1 * obj->adcData.offset_I_ad.value[2] +
                         obj->adcData.I_A.value[2] * offsetK2;
+#endif
+
 #endif // !(MOTOR1_ISBLDC || MOTOR1_DCLINKSS)
 
 #if defined(MOTOR1_FAST) || defined(MOTOR1_ISBLDC)
@@ -1589,8 +1632,8 @@ __interrupt void motor1CtrlISR(void)
 {
 
     motorVars_M1.ISRCount++;
-
-
+    GPIO_togglePin(22);
+    //GPIO_writePin(37,1);
     MOTOR_Vars_t *obj = (MOTOR_Vars_t *)motorHandle_M1;
     USER_Params *objUser = (USER_Params *)(obj->userParamsHandle);
 
@@ -1899,7 +1942,17 @@ __interrupt void motor1CtrlISR(void)
     obj->adcData.I_A.value[0] = DCLINK_SS_getIa(obj->dclinkHandle);
     obj->adcData.I_A.value[1] = DCLINK_SS_getIb(obj->dclinkHandle);
     obj->adcData.I_A.value[2] = DCLINK_SS_getIc(obj->dclinkHandle);
-
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+    // run single-shunt current reconstruction
+    DCLINK_SS_runCurrentReconstruction(obj->dclinkHandle,
+                                     &obj->adcData.Idc1_A, &obj->adcData.Idc2_A);
+    obj->sector = DCLINK_SS_getSector1(obj->dclinkHandle);
+//    obj->adcData.I_A.value[0] = DCLINK_SS_getIa(obj->dclinkHandle);
+//    obj->adcData.I_A.value[1] = DCLINK_SS_getIb(obj->dclinkHandle);
+//    obj->adcData.I_A.value[2] = DCLINK_SS_getIc(obj->dclinkHandle);
+    obj->adcData.I_A.value[0] = obj->adcData.double_shunt_I_A.value[0];
+    obj->adcData.I_A.value[1] = obj->adcData.double_shunt_I_A.value[1];
+    obj->adcData.I_A.value[2] = obj->adcData.double_shunt_I_A.value[2];
 #if defined(MOTOR1_FILTERIS)
     // run first order filters for current sensing
     obj->adcIs_A.value[0] = FILTER_FO_run(obj->filterHandle_Is[0], obj->adcData.I_A.value[0]);
@@ -1912,6 +1965,7 @@ __interrupt void motor1CtrlISR(void)
         obj->adcData.I_A.value[1] = obj->adcIs_A.value[1];
         obj->adcData.I_A.value[2] = obj->adcIs_A.value[2];
     }
+
 #endif  // MOTOR1_FILTERIS
 #else // !(MOTOR1_DCLINKSS)
 #if defined(MOTOR1_FILTERIS)
@@ -4313,7 +4367,19 @@ __interrupt void motor1CtrlISR(void)
     // Set trigger point in the middle of the low side pulse
     HAL_setTrigger(obj->halMtrHandle,
                    &obj->pwmData, obj->ignoreShuntNextCycle, obj->midVolShunt);
-#else   // !MOTOR1_OVM
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+    // write the PWM compare values
+        //根据影寄存器的设置，只有当TBCTR等于0时候，新的比较值才会载入
+   HAL_writePWMData(obj->halMtrHandle, &obj->pwmData);
+
+    // revise PWM compare(CMPA/B) values for shifting switching pattern
+    // and, update SOC trigger point
+   //1.该函数会为了获得采样窗口对PWM进行偏移，然后对EPWM123，进行重新赋值，虽然EPWM赋值操作在HAL_writePWMData
+   //进行过一次但是不影响，再次赋值。因为只有当TBCTR=0，才会更新进去
+   //2.设置CMPC、CMPD确定ADC触发窗口。
+    HAL_runSingleShuntCompensation(obj->halMtrHandle, obj->dclinkHandle,
+                         &obj->Vab_out_V, &obj->pwmData, obj->adcData.VdcBus_V);
+#else
     // write the PWM compare values
     HAL_writePWMData(obj->halMtrHandle, &obj->pwmData);
 #endif  // !MOTOR1_OVM
@@ -4381,7 +4447,7 @@ __interrupt void motor1CtrlISR(void)
     //DAC128S_writeData(dac128sHandle);
 
     data_scope.data_state = data_ready;
-
+    //GPIO_writePin(37,0);
 #endif  // !(F280013x | F280015x | F28002x | F28003x)
 #endif  // DAC128S_ENABLE
 

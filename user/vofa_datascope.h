@@ -14,7 +14,7 @@
 #include "driverlib.h"
 #include "device.h"
 
-#define CHNNEL_NUM 5
+#define CHNNEL_NUM 8
 
 typedef enum{
     data_ready  = 0,

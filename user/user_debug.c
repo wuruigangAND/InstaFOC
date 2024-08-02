@@ -1,17 +1,15 @@
 /*
  * user.c
  *
- *  Created on: 2024年7月8日
+ *  Created on: 2024锟斤拷7锟斤拷8锟斤拷
  *      Author: Railgun
  */
 
 #include "user_debug.h"
 #include "user_mtr1.h"
 
-
-//配置几个同步的PWM用于观察触发点
 void dclink_debug_init(void){
-    uint16_t       pwmPeriodCycles = (uint16_t)(USER_M1_PWM_TBPRD_NUM);
+    uint16_t  pwmPeriodCycles = (uint16_t)(USER_M1_PWM_TBPRD_NUM);
     GPIO_setDirectionMode(12, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(12, GPIO_PIN_TYPE_STD);
     GPIO_setPinConfig(GPIO_12_EPWM7_A);
@@ -19,7 +17,7 @@ void dclink_debug_init(void){
     GPIO_setPadConfig(6, GPIO_PIN_TYPE_STD);
     GPIO_setPinConfig(GPIO_6_EPWM4_A);
 
-    //设置EPWM7
+    //锟斤拷锟斤拷EPWM7
    EPWM_setTimeBaseCounterMode(EPWM7_BASE,
                                EPWM_COUNTER_MODE_UP_DOWN);
 
@@ -89,7 +87,7 @@ void dclink_debug_init(void){
 
 
 
-//设置EPWM4
+//锟斤拷锟斤拷EPWM4
     EPWM_setTimeBaseCounterMode(EPWM4_BASE,EPWM_COUNTER_MODE_UP_DOWN);
 
    EPWM_disablePhaseShiftLoad(EPWM4_BASE);
@@ -204,6 +202,9 @@ void uart_init(uint32_t baud){
 }
 
 void user_io(void){
+    GPIO_setDirectionMode(22, GPIO_DIR_MODE_OUT);
+    GPIO_setPadConfig(22, GPIO_PIN_TYPE_PULLUP);
+    GPIO_setPinConfig(GPIO_22_GPIO22);
     GPIO_setDirectionMode(37, GPIO_DIR_MODE_OUT);
     GPIO_setPadConfig(37, GPIO_PIN_TYPE_PULLUP);
     GPIO_setPinConfig(GPIO_37_GPIO37);

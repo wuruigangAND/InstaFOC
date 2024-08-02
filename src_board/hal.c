@@ -561,7 +561,7 @@ void HAL_setupADCs(HAL_Handle handle)
     ADC_setPPBCalibrationOffset(MTR1_IV_ADC_BASE, MTR1_IV_ADC_PPB_NUM, 0);
 
     // ISEN_C_M1
-    ADC_setupSOC(MTR1_IW_ADC_BASE, MTR1_IW_ADC_SOC_NUM, MTR1_ADC_TRIGGER_SOC,
+   /* ADC_setupSOC(MTR1_IW_ADC_BASE, MTR1_IW_ADC_SOC_NUM, MTR1_ADC_TRIGGER_SOC,
                  MTR1_IW_ADC_CH_NUM, MTR1_ADC_I_SAMPLEWINDOW);
 
     // Configure PPB to eliminate subtraction related calculation
@@ -569,7 +569,29 @@ void HAL_setupADCs(HAL_Handle handle)
     ADC_setupPPB(MTR1_IW_ADC_BASE, MTR1_IW_ADC_PPB_NUM, MTR1_IW_ADC_SOC_NUM);
 
     // Write zero to this for now till offset calibration complete
-    ADC_setPPBCalibrationOffset(MTR1_IW_ADC_BASE, MTR1_IW_ADC_PPB_NUM, 0);
+    ADC_setPPBCalibrationOffset(MTR1_IW_ADC_BASE, MTR1_IW_ADC_PPB_NUM, 0);*/
+#if defined(USE_MY_DRV8323RH_DCLINK)
+    // configure the interrupt sources
+    // Interrupt for motor 1
+
+    // Idc 1st
+    ADC_setupSOC(MTR1_IDC1_ADC_BASE, MTR1_IDC1_ADC_SOC_NUM, MTR1_IDC1_TRIGGER_SOC,
+                 MTR1_IDC1_ADC_CH_NUM, MTR1_ADC_I_SAMPLEWINDOW);
+    // Idc 2nd
+    ADC_setupSOC(MTR1_IDC2_ADC_BASE, MTR1_IDC2_ADC_SOC_NUM, MTR1_IDC2_TRIGGER_SOC,
+                 MTR1_IDC2_ADC_CH_NUM, MTR1_ADC_I_SAMPLEWINDOW);
+
+    // Idc 3rd
+    ADC_setupSOC(MTR1_IDC3_ADC_BASE, MTR1_IDC3_ADC_SOC_NUM, MTR1_IDC3_TRIGGER_SOC,
+                 MTR1_IDC3_ADC_CH_NUM, MTR1_ADC_I_SAMPLEWINDOW);
+
+    // Idc 4th
+    ADC_setupSOC(MTR1_IDC4_ADC_BASE, MTR1_IDC4_ADC_SOC_NUM, MTR1_IDC4_TRIGGER_SOC,
+                 MTR1_IDC4_ADC_CH_NUM, MTR1_ADC_I_SAMPLEWINDOW);
+#endif
+
+
+
 #endif   // !(MOTOR1_DCLINKSS)
 
 #if defined(MOTOR1_FAST) || defined(MOTOR1_ISBLDC)
@@ -3417,6 +3439,28 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
                                       EPWM_AQ_OUTPUT_A,
                                       EPWM_AQ_OUTPUT_HIGH,
                                       EPWM_AQ_OUTPUT_ON_TIMEBASE_PERIOD);
+
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+        // setup the Action-Qualifier Output A Register (AQCTLA)
+       EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
+                                     EPWM_AQ_OUTPUT_A,
+                                     EPWM_AQ_OUTPUT_HIGH,
+                                     EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
+
+       EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
+                                     EPWM_AQ_OUTPUT_A,
+                                     EPWM_AQ_OUTPUT_LOW,
+                                     EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);//因为需要生成不对成PWM，因此此处设置有差异
+                                     //EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
+       EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
+                                     EPWM_AQ_OUTPUT_A,
+                                     EPWM_AQ_OUTPUT_LOW,
+                                     EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+
+       EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
+                                     EPWM_AQ_OUTPUT_A,
+                                     EPWM_AQ_OUTPUT_HIGH,
+                                     EPWM_AQ_OUTPUT_ON_TIMEBASE_PERIOD);
 #else  // !(MOTOR1_DCLINKSS)
         // setup the Action-Qualifier Output A Register (AQCTLA)
         EPWM_setActionQualifierAction(obj->pwmHandle[cnt],
@@ -3536,10 +3580,51 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
                              EPWM_SOC_TBCTR_D_CMPD);
 
     EPWM_enableADCTrigger(obj->pwmHandle[2], EPWM_SOC_B);
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+    // setup the Event Trigger Selection Register (ETSEL)
+    EPWM_setInterruptSource(obj->pwmHandle[0], EPWM_INT_TBCTR_ZERO);
+
+    EPWM_enableInterrupt(obj->pwmHandle[0]);
+
+    EPWM_setADCTriggerSource(obj->pwmHandle[0],
+                             EPWM_SOC_A, EPWM_SOC_TBCTR_D_CMPC);
+
+    EPWM_enableADCTrigger(obj->pwmHandle[0], EPWM_SOC_A);
+
+    // ADC SOC trigger for the 1st dc-link current sampling
+    EPWM_setADCTriggerSource(obj->pwmHandle[1],
+                                 EPWM_SOC_A,
+                                 EPWM_SOC_TBCTR_U_CMPC);
+
+    EPWM_enableADCTrigger(obj->pwmHandle[1], EPWM_SOC_A);
+
+    // ADC SOC trigger for the 2nd dc-link current sampling
+    EPWM_setADCTriggerSource(obj->pwmHandle[1],
+                             EPWM_SOC_B,
+                             EPWM_SOC_TBCTR_U_CMPD);
+
+    EPWM_enableADCTrigger(obj->pwmHandle[1], EPWM_SOC_B);
+
+    // ADC SOC trigger for the 3rd dc-link current sampling
+    EPWM_setADCTriggerSource(obj->pwmHandle[2],
+                                 EPWM_SOC_A,
+                                 EPWM_SOC_TBCTR_D_CMPC);
+
+    EPWM_enableADCTrigger(obj->pwmHandle[2], EPWM_SOC_A);
+
+    // ADC SOC trigger for the 4th dc-link current sampling
+    EPWM_setADCTriggerSource(obj->pwmHandle[2],
+                             EPWM_SOC_B,
+                             EPWM_SOC_TBCTR_D_CMPD);
+
+    EPWM_enableADCTrigger(obj->pwmHandle[2], EPWM_SOC_B);
+
+
+
 #else   //!(MOTOR1_ISBLDC || MOTOR1_DCLINKSS)
     // setup the Event Trigger Selection Register (ETSEL)
     EPWM_setInterruptSource(obj->pwmHandle[0], EPWM_INT_TBCTR_ZERO);
-    //although  line 3535 initial epwm_init ,no isr function was registered,  so useless
+    //although  line 3535 initial epwm_init ,no isr function was registered,  so this is useless
 
     EPWM_enableInterrupt(obj->pwmHandle[0]);
 
@@ -3576,6 +3661,16 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
                                     numPWMTicksPerISRTick);
     EPWM_setADCTriggerEventPrescale(obj->pwmHandle[2], EPWM_SOC_B,
                                     numPWMTicksPerISRTick);
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+    EPWM_setADCTriggerEventPrescale(obj->pwmHandle[1], EPWM_SOC_A,
+                                       numPWMTicksPerISRTick);
+    EPWM_setADCTriggerEventPrescale(obj->pwmHandle[1], EPWM_SOC_B,
+                                   numPWMTicksPerISRTick);
+
+    EPWM_setADCTriggerEventPrescale(obj->pwmHandle[2], EPWM_SOC_A,
+                                   numPWMTicksPerISRTick);
+    EPWM_setADCTriggerEventPrescale(obj->pwmHandle[2], EPWM_SOC_B,
+                                   numPWMTicksPerISRTick);
 #endif  //MOTOR1_DCLINKSS
 
     // setup the Event Trigger Clear Register (ETCLR)
@@ -3609,7 +3704,22 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
                                 EPWM_COUNTER_COMPARE_C, pwmPeriodCycles>>1);
     EPWM_setCounterCompareValue(obj->pwmHandle[2],
                                 EPWM_COUNTER_COMPARE_D, pwmPeriodCycles>>1);
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+    EPWM_clearADCTriggerFlag(obj->pwmHandle[1], EPWM_SOC_A);
+    EPWM_clearADCTriggerFlag(obj->pwmHandle[1], EPWM_SOC_B);
 
+    EPWM_clearADCTriggerFlag(obj->pwmHandle[2], EPWM_SOC_A);
+    EPWM_clearADCTriggerFlag(obj->pwmHandle[2], EPWM_SOC_B);
+
+    EPWM_setCounterCompareValue(obj->pwmHandle[1],
+                                EPWM_COUNTER_COMPARE_C, pwmPeriodCycles>>1);
+    EPWM_setCounterCompareValue(obj->pwmHandle[1],
+                                EPWM_COUNTER_COMPARE_D, pwmPeriodCycles>>1);
+
+    EPWM_setCounterCompareValue(obj->pwmHandle[2],
+                                EPWM_COUNTER_COMPARE_C, pwmPeriodCycles>>1);
+    EPWM_setCounterCompareValue(obj->pwmHandle[2],
+                                EPWM_COUNTER_COMPARE_D, pwmPeriodCycles>>1);
 #endif  //MOTOR1_DCLINKSS
 
     //dclink_debug_init();

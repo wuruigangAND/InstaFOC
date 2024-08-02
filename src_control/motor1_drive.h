@@ -181,6 +181,8 @@ extern MTPA_Obj     mtpa_M1;
 #if defined(MOTOR1_DCLINKSS)
 //!< the single-shunt current reconstruction object
 extern DCLINK_SS_Obj    dclink_M1;
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+extern DCLINK_SS_Obj    dclink_M1;
 #endif // MOTOR1_DCLINKSS
 
 #ifdef MOTOR1_VOLRECT

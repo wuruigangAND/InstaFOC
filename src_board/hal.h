@@ -71,6 +71,8 @@ extern "C"
 
 #if defined(MOTOR1_DCLINKSS)
 #include "dclink_ss.h"
+#elif defined(USE_MY_DRV8323RH_DCLINK)
+#include "dclink_ss.h"
 #endif // MOTOR1_DCLINKSS
 
 // the globals
@@ -907,6 +909,8 @@ extern uint32_t loadSize_SFRA_F32_Data;
 #define MTR1_IV_ADC_BASE        ADCC_BASE               // ADCC-A14/C4*
 #define MTR1_IW_ADC_BASE        ADCC_BASE               // ADCC-A15/C7*
 
+#define MTR1_IDC1_ADC_BASE     ADCC_BASE
+
 #define MTR1_IU_ADCRES_BASE     ADCARESULT_BASE         // ADCA-A11*/C0
 #define MTR1_IV_ADCRES_BASE     ADCCRESULT_BASE         // ADCC-A14/C4*
 #define MTR1_IW_ADCRES_BASE     ADCCRESULT_BASE         // ADCC-A15/C7*
@@ -922,6 +926,39 @@ extern uint32_t loadSize_SFRA_F32_Data;
 #define MTR1_IU_ADC_PPB_NUM     ADC_PPB_NUMBER1         // ADCA-A11*/C10-SOC1-PPB1
 #define MTR1_IV_ADC_PPB_NUM     ADC_PPB_NUMBER1         // ADCC-A14/C4* -SOC1-PPB1
 #define MTR1_IW_ADC_PPB_NUM     ADC_PPB_NUMBER2         // ADCC-A15/C7*- SOC2-PPB2
+
+//for dclink config
+#define MTR1_IDC1_TRIGGER_SOC    ADC_TRIGGER_EPWM2_SOCA  // EPWM2_SOCA
+#define MTR1_IDC2_TRIGGER_SOC    ADC_TRIGGER_EPWM2_SOCB  // EPWM2_SOCB
+#define MTR1_IDC3_TRIGGER_SOC    ADC_TRIGGER_EPWM3_SOCA  // EPWM3_SOCA
+#define MTR1_IDC4_TRIGGER_SOC    ADC_TRIGGER_EPWM3_SOCB  // EPWM3_SOCB
+
+#define MTR1_IDC1_ADC_BASE      ADCC_BASE               //
+#define MTR1_IDC2_ADC_BASE      ADCC_BASE               //
+#define MTR1_IDC3_ADC_BASE      ADCC_BASE               //
+#define MTR1_IDC4_ADC_BASE      ADCC_BASE               //
+
+#define MTR1_IDC1_ADCRES_BASE   ADCCRESULT_BASE         //
+#define MTR1_IDC2_ADCRES_BASE   ADCCRESULT_BASE         //
+#define MTR1_IDC3_ADCRES_BASE   ADCCRESULT_BASE         //
+#define MTR1_IDC4_ADCRES_BASE   ADCCRESULT_BASE         //
+
+#define MTR1_IDC1_ADC_CH_NUM    ADC_CH_ADCIN1           //
+#define MTR1_IDC2_ADC_CH_NUM    ADC_CH_ADCIN1           //
+#define MTR1_IDC3_ADC_CH_NUM    ADC_CH_ADCIN1           //
+#define MTR1_IDC4_ADC_CH_NUM    ADC_CH_ADCIN1           //
+
+#define MTR1_IDC1_ADC_SOC_NUM   ADC_SOC_NUMBER7        // ADCC-A14/C4* -SOC0-PPB1
+#define MTR1_IDC2_ADC_SOC_NUM   ADC_SOC_NUMBER8        // ADCC-A14/C4* -SOC1-PPB2
+#define MTR1_IDC3_ADC_SOC_NUM   ADC_SOC_NUMBER9        // ADCC-A14/C4* -SOC2-PPB3
+#define MTR1_IDC4_ADC_SOC_NUM   ADC_SOC_NUMBER10       // ADCC-A14/C4* -SOC3-PPB4
+
+
+#define USER_M1_DCLINKSS_MIN_DURATION   (500U)//(225U)      //
+
+//! \brief Defines the sample delay, Clock Cycle
+#define USER_M1_DCLINKSS_SAMPLE_DELAY   (200U)      //
+
 #endif
 
 // CMPSS
@@ -2168,6 +2205,7 @@ HAL_readMtr1ADCData(HAL_ADCData_t *pADCData)
 #error This kit doesn't support single shunt
 #else   // Three-shunt, !MOTOR1_DCLINKSS & !DRV8329AEVM_REVA
 
+#if (!defined(USE_MY_DRV8323RH_DCLINK))&&defined(USER_MY_DRV8323RH)
     // convert phase A current
     //这里使用了PPB模块
     value = (float32_t)ADC_readPPBResult(MTR1_IU_ADCRES_BASE, MTR1_IU_ADC_PPB_NUM);
@@ -2176,16 +2214,49 @@ HAL_readMtr1ADCData(HAL_ADCData_t *pADCData)
     // convert phase B current
     value = (float32_t)ADC_readPPBResult(MTR1_IV_ADCRES_BASE, MTR1_IV_ADC_PPB_NUM);
     pADCData->I_A.value[1] = value * pADCData->current_sf;
-#ifndef USER_MY_DRV8323RH
-    // convert phase C current
-    value = (float32_t)ADC_readPPBResult(MTR1_IW_ADCRES_BASE, MTR1_IW_ADC_PPB_NUM);
-    pADCData->I_A.value[2] = value * pADCData->current_sf;
-#else
+//#ifndef USER_MY_DRV8323RH
+//    // convert phase C current
+//    value = (float32_t)ADC_readPPBResult(MTR1_IW_ADCRES_BASE, MTR1_IW_ADC_PPB_NUM);
+//    pADCData->I_A.value[2] = value * pADCData->current_sf;
+//#else
     //双电阻电流重构下的电流
     pADCData->I_A.value[2] = - pADCData->I_A.value[0] - pADCData->I_A.value[1];
-    value = (float32_t)ADC_readPPBResult(MTR1_IW_ADCRES_BASE, MTR1_IW_ADC_PPB_NUM);
-    pADCData->Idc1_A.value[0] = value* pADCData->current_sf;
+//    value = (float32_t)ADC_readPPBResult(MTR1_IW_ADCRES_BASE, MTR1_IW_ADC_PPB_NUM);
+//    pADCData->Idc1_A.value[0] = value* pADCData->current_sf;
+
 #endif
+
+#if defined(USE_MY_DRV8323RH_DCLINK)
+    //这里使用了PPB模块
+    value = (float32_t)ADC_readPPBResult(MTR1_IU_ADCRES_BASE, MTR1_IU_ADC_PPB_NUM);
+    pADCData->double_shunt_I_A.value[0] = value * pADCData->current_sf;
+
+    // convert phase B current
+    value = (float32_t)ADC_readPPBResult(MTR1_IV_ADCRES_BASE, MTR1_IV_ADC_PPB_NUM);
+    pADCData->double_shunt_I_A.value[1] = value * pADCData->current_sf;
+
+    pADCData->double_shunt_I_A.value[2] = - pADCData->double_shunt_I_A.value[0] -
+            pADCData->double_shunt_I_A.value[1];
+
+    //母线电阻采样
+    // convert dc-link current 1
+    value = (float32_t)(ADC_readResult(MTR1_IDC1_ADCRES_BASE,MTR1_IDC1_ADC_SOC_NUM) - 2048.f);
+    pADCData->Idc1_A.value[0] = value * pADCData->current_sf;
+
+    // convert dc-link current 2
+    value = (float32_t)(ADC_readResult(MTR1_IDC2_ADCRES_BASE,MTR1_IDC2_ADC_SOC_NUM)- 2048.f);
+    pADCData->Idc1_A.value[1] = value * pADCData->current_sf;
+
+    // convert dc-link current 3
+    value = (float32_t)(ADC_readResult(MTR1_IDC3_ADCRES_BASE,MTR1_IDC3_ADC_SOC_NUM)- 2048.f);
+    pADCData->Idc2_A.value[0] = value * pADCData->current_sf;
+
+    // convert dc-link current 4th
+    value = (float32_t)(ADC_readResult(MTR1_IDC4_ADCRES_BASE,MTR1_IDC4_ADC_SOC_NUM)- 2048.f);
+    pADCData->Idc2_A.value[1] = value * pADCData->current_sf;
+#endif
+
+//#endif
 
 #endif  // !(MOTOR1_DCLINKSS)
 
@@ -3116,7 +3187,7 @@ static inline void HAL_setTrigger(HAL_MTR_Handle handle, HAL_PWMData_t *pPWMData
     return;
 } // end of HAL_setTrigger() function
 
-#if defined(MOTOR1_DCLINKSS)
+#if defined(MOTOR1_DCLINKSS)||defined(USE_MY_DRV8323RH_DCLINK)
 // Two methods for single shunt
 #if !defined(FAST_DCLINKSS)
 //! \brief     PWM phase shift and ADC SOC timing for dc_link current sensing

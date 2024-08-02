@@ -1280,6 +1280,7 @@
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/src_control/drivers/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/src_board"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/src_device"/>
+									<listOptionValue builtIn="false" value="${workspace_loc:/${ProjName}/user}"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/src_device/device_support/headers/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/src_device/driverlib"/>
 									<listOptionValue builtIn="false" value="${CG_TOOL_ROOT}/include"/>
@@ -1294,7 +1295,8 @@
 									<listOptionValue builtIn="false" value="_FULL_FAST_LIB"/>
 									<listOptionValue builtIn="false" value="BSXL8323RH_REVB"/>
 									<listOptionValue builtIn="false" value="USER_MY_DRV8323RH"/>
-									<listOptionValue builtIn="false" value="USE_MY_DRV8323RH_DCLINK"/>
+									<listOptionValue builtIn="false" value="USE_UART_Debug"/>
+									<listOptionValue builtIn="false" value="USE_MY_DRV8323RH_DCLINK_N"/>
 									<listOptionValue builtIn="false" value="MOTOR1_FAST_N"/>
 									<listOptionValue builtIn="false" value="MOTOR1_ESMO"/>
 									<listOptionValue builtIn="false" value="MOTOR1_ENC_N"/>
