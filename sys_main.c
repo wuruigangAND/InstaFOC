@@ -279,12 +279,12 @@ void main(void)
     user_io();
     Data_Scope_Init();
     data_scope.ptrData[0] = &motorVars_M1.angleGen_rad;
-    data_scope.ptrData[1] = &motorVars_M1.adcData.I_A.value[0];
-    data_scope.ptrData[2] = &motorVars_M1.adcData.I_A.value[1];
-    data_scope.ptrData[3] = &motorVars_M1.adcData.I_A.value[2];
-    data_scope.ptrData[4] = &motorVars_M1.adcData.double_shunt_I_A.value[0];
-    data_scope.ptrData[5] = &motorVars_M1.adcData.double_shunt_I_A.value[1];
-    data_scope.ptrData[6] = &motorVars_M1.adcData.double_shunt_I_A.value[2];
+    data_scope.ptrData[1] = &motorVars_M1.adcData.double_shunt_I_A.value[0];
+    data_scope.ptrData[2] = &motorVars_M1.adcData.double_shunt_I_A.value[1];
+    data_scope.ptrData[3] = &motorVars_M1.adcData.double_shunt_I_A.value[2];
+    data_scope.ptrData[4] = &motorVars_M1.dclinkHandle->I_A.value[0];
+    data_scope.ptrData[5] = &motorVars_M1.dclinkHandle->I_A.value[1];
+    data_scope.ptrData[6] = &motorVars_M1.dclinkHandle->I_A.value[2];
     data_scope.ptrData[7] = &motorVars_M1.sector;
     //data_scope.ptrData[4] = &motorVars_M1.sector;
     //data_scope.ptrData[4] = &((float32_t)(motorVars_M1.dclinkHandle->flag_SST * 10.0f));

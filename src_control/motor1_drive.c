@@ -1947,12 +1947,12 @@ __interrupt void motor1CtrlISR(void)
     DCLINK_SS_runCurrentReconstruction(obj->dclinkHandle,
                                      &obj->adcData.Idc1_A, &obj->adcData.Idc2_A);
     obj->sector = DCLINK_SS_getSector1(obj->dclinkHandle);
-//    obj->adcData.I_A.value[0] = DCLINK_SS_getIa(obj->dclinkHandle);
-//    obj->adcData.I_A.value[1] = DCLINK_SS_getIb(obj->dclinkHandle);
-//    obj->adcData.I_A.value[2] = DCLINK_SS_getIc(obj->dclinkHandle);
-    obj->adcData.I_A.value[0] = obj->adcData.double_shunt_I_A.value[0];
-    obj->adcData.I_A.value[1] = obj->adcData.double_shunt_I_A.value[1];
-    obj->adcData.I_A.value[2] = obj->adcData.double_shunt_I_A.value[2];
+    obj->adcData.I_A.value[0] = -1*DCLINK_SS_getIa(obj->dclinkHandle);
+    obj->adcData.I_A.value[1] = -1*DCLINK_SS_getIb(obj->dclinkHandle);
+    obj->adcData.I_A.value[2] = -1*DCLINK_SS_getIc(obj->dclinkHandle);
+//    obj->adcData.I_A.value[0] = obj->adcData.double_shunt_I_A.value[0];
+//    obj->adcData.I_A.value[1] = obj->adcData.double_shunt_I_A.value[1];
+//    obj->adcData.I_A.value[2] = obj->adcData.double_shunt_I_A.value[2];
 #if defined(MOTOR1_FILTERIS)
     // run first order filters for current sensing
     obj->adcIs_A.value[0] = FILTER_FO_run(obj->filterHandle_Is[0], obj->adcData.I_A.value[0]);
@@ -4377,8 +4377,8 @@ __interrupt void motor1CtrlISR(void)
    //1.该函数会为了获得采样窗口对PWM进行偏移，然后对EPWM123，进行重新赋值，虽然EPWM赋值操作在HAL_writePWMData
    //进行过一次但是不影响，再次赋值。因为只有当TBCTR=0，才会更新进去
    //2.设置CMPC、CMPD确定ADC触发窗口。
-//    HAL_runSingleShuntCompensation(obj->halMtrHandle, obj->dclinkHandle,
-//                         &obj->Vab_out_V, &obj->pwmData, obj->adcData.VdcBus_V);
+    HAL_runSingleShuntCompensation(obj->halMtrHandle, obj->dclinkHandle,
+                         &obj->Vab_out_V, &obj->pwmData, obj->adcData.VdcBus_V);
 #else
     // write the PWM compare values
     HAL_writePWMData(obj->halMtrHandle, &obj->pwmData);

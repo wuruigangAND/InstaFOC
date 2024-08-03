@@ -3585,7 +3585,7 @@ void HAL_setupPWMs(HAL_MTR_Handle handle)
     EPWM_setInterruptSource(obj->pwmHandle[0], EPWM_INT_TBCTR_ZERO);
 
     EPWM_enableInterrupt(obj->pwmHandle[0]);
-
+    //常规触发采样配置
     EPWM_setADCTriggerSource(obj->pwmHandle[0],
                              EPWM_SOC_A, EPWM_SOC_TBCTR_D_CMPC);
 
